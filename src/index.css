@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary1 : #E2D4F0;
+    --primary2 : #D0B7E6;
+    --primary3 : #A06ECE;
+    --primary4 : #7126B5;
+    --primary5 : #4B1979;
+
+    --secondary1 : #FFF8ED;
+    --secondary2 : #FFF0DC;
+    --secondary3 : #FFE9CA;
+    --secondary4 : #D4C2A8;
+    --secondary5 : #AA9B87;
+
+    --danger : #FF0000;
+    --warning : #F9CC00;
+    --success : #73CA5C;
+
+    --neutral1 : #FFFFFF;
+    --neutral2 : #D0D0D0;
+    --neutral3 : #8A8A8A;
+    --neutral4 : #3C3C3C;
+    --neutral5 : #151515;
+
+}
