@@ -1,16 +1,16 @@
 .navbar {
-    height: 5.25rem;
+    height: 5rem;
     background-color: white;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     z-index: 99;
+    box-shadow: 0 0.2rem 0.2rem rgba(97, 96, 96, 0.2);
 }
 
 .navbar__container {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     width: 80vw;
@@ -20,32 +20,6 @@
 
 .navbar__logo {
     display: flex;
-    gap: 2rem;
-}
-
-input {
-    width: 350px;
-    border: none;
-    background: transparent;
-}
-
-input::placeholder {
-    font-size: 14px;
-    font-weight: 400;
-
-}
-
-input[type="text"]:focus {
-    outline: none;
-}
-
-.navbar__search {
-    background: #EEEEEE;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem;
-    border-radius: 16px;
 }
 
 button {
