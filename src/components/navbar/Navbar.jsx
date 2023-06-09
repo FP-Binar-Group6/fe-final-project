@@ -6,9 +6,10 @@ import LoginIcon from "@mui/icons-material/Login";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const isLoggedIn = true;
 
   const pointer = { cursor: "pointer" };
@@ -20,9 +21,21 @@ const Navbar = () => {
             <img src={logo} alt="" />
           </Link>
           <div className="navbar__menu">
-            <FormatListBulletedIcon sx={{ fontSize: 24 }} style={pointer} />
-            <NotificationsNoneIcon sx={{ fontSize: 24 }} style={pointer} />
-            <PersonOutlineOutlinedIcon sx={{ fontSize: 24 }} style={pointer} />
+            <FormatListBulletedIcon
+              sx={{ fontSize: 24 }}
+              style={pointer}
+              onClick={() => navigate("/history")}
+            />
+            <NotificationsNoneIcon
+              sx={{ fontSize: 24 }}
+              style={pointer}
+              onClick={() => navigate("/notification")}
+            />
+            <PersonOutlineOutlinedIcon
+              sx={{ fontSize: 24 }}
+              style={pointer}
+              onClick={() => navigate("/profile")}
+            />
           </div>
         </div>
       ) : (
@@ -30,7 +43,7 @@ const Navbar = () => {
           <Link to="/" className="navbar__logo">
             <img src={logo} alt="" />
           </Link>
-          <button>
+          <button onClick={() => navigate("/login")}>
             <LoginIcon sx={{ color: "white" }} /> Masuk
           </button>
         </div>
