@@ -1,0 +1,149 @@
+.search{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchContainer{
+    max-width: 1024px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchHeaderBox{
+    /* max-width: 1024px; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+}
+
+.searchHeader{
+    max-width: 1024px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+.searchTitle{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.searchResult{
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    
+}
+
+.searchResultMenu{
+    display: flex;
+    background-color: var(--primary3);
+    padding: 13px 20px;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    width: 100%;
+    flex: 4;
+    border-radius: 12px;
+}
+
+.searchBtnBack{
+    cursor: pointer;
+}
+
+.searchBtnUbah{
+    flex: 1;
+    display: flex;
+    font-weight: bold;
+    background-color: var(--success);
+    border-radius: 12px;
+    align-items: center;
+    padding: 13px 20px;
+    justify-content: center;
+    color: white;
+}
+
+.searchResultDate{
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    text-align: center;
+    margin: 15px 0px;
+}
+
+.searchResultDateDay{
+    font-weight: bold;
+}
+
+.searchFilterUrutan{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    color: var(--primary4);
+    margin: 15px 0px;
+}
+
+.searchFilterUrutanItem{
+    display: flex;
+    border: 1px solid var(--primary3);
+    object-fit: contain;
+    border-radius: 16px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.searchItem{
+    display: flex;
+    gap: 27px;
+}
+
+.searchItemLeft{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 24px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    height: fit-content;
+}
+
+.searchItemLeftTitle{
+    margin-bottom: 24px;
+}
+
+.searchFilterItems{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+}
+
+.searchFilterItemsLine{
+    border: 1px solid var(--neutral2);
+}
+
+.searchFilterItem{
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.searchFilterItemText{
+    width: 100%;
+}
+
+.searchItemRight{
+    display: flex;
+    flex-direction: column;
+    flex: 4;
+    gap: 16px;
+}
+
+
