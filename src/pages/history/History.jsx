@@ -34,15 +34,15 @@ const History = () => {
       <Container
         fluid
         className="my-2 pb-3 "
-        style={{ boxShadow: "0.5px 2px rgb(206, 204, 204)" }}
+        style={{ boxShadow: "0px 2px rgb(206, 204, 204)" }}
       >
         <Row className="d-flex justify-content-center">
-          <Col className="me-5" xs={9}>
+          <Col className="me-5" xs={8}>
             <h5>Riwayat Pemesanan</h5>
           </Col>
         </Row>
-        <Row className="d-flex align-items-center justify-content-center me-5 mt-3">
-          <Col md={7} className="pb-2">
+        <Row className="d-flex align-items-center justify-content-center me-3 mt-3">
+          <Col xs={6} className="pb-2">
             <div
               className="d-flex align-items-center  p-2 ps-3"
               style={{
@@ -55,10 +55,12 @@ const History = () => {
               Beranda
             </div>
           </Col>
-          <Col md={2}>
+
+          {/* visible in lg */}
+          <Col xs={2} className="d-flex d-none  d-lg-block">
             <Button
               onClick={() => setDatepicker(true)}
-              className="ps-4 pe-4 me-2 ms-2"
+              className="ms-1 mb-2 "
               variant="transparant"
               style={{
                 borderRadius: "24px",
@@ -73,7 +75,60 @@ const History = () => {
             </Button>
 
             <SearchOutlinedIcon
-              className=" ms-3"
+              className=" ms-3 mb-2"
+              onClick={() => setSmShow(true)}
+              sx={{ fontSize: 40 }}
+              style={{ color: "#A06ECE", cursor: "pointer" }}
+            />
+          </Col>
+
+          {/* visible only in md */}
+          <Col xs={3} className="d-flex d-none d-md-block d-lg-none">
+            <Button
+              onClick={() => setDatepicker(true)}
+              className="mb-2 "
+              variant="transparant"
+              style={{
+                borderRadius: "24px",
+                border: "solid #A06ECE",
+              }}
+            >
+              <FilterAltOutlinedIcon
+                sx={{ fontSize: 25 }}
+                style={{ color: "#8A8A8A" }}
+              />
+              Filter
+            </Button>
+
+            <SearchOutlinedIcon
+              className=" ms-3 mb-2"
+              onClick={() => setSmShow(true)}
+              sx={{ fontSize: 40 }}
+              style={{ color: "#A06ECE", cursor: "pointer" }}
+            />
+          </Col>
+
+          {/* visible only in sm/xs */}
+          <Col xs={4} className="d-flex d-block d-sm-none">
+            <Button
+              onClick={() => setDatepicker(true)}
+              className="mb-2 d-flex"
+              variant="transparant"
+              style={{
+                width: "6rem",
+                borderRadius: "24px",
+                border: "solid #A06ECE",
+              }}
+            >
+              <FilterAltOutlinedIcon
+                sx={{ fontSize: 25 }}
+                style={{ color: "#8A8A8A" }}
+              />
+              Filter
+            </Button>
+
+            <SearchOutlinedIcon
+              className=" ms-3 mb-2"
               onClick={() => setSmShow(true)}
               sx={{ fontSize: 40 }}
               style={{ color: "#A06ECE", cursor: "pointer" }}
@@ -82,21 +137,21 @@ const History = () => {
 
           {/* Modal Seacrh */}
           <Modal
-            size="xs"
+            size="md"
             show={smShow}
-            onHide={() => setSmShow(false)}
             centered
-            aria-labelledby="example-modal-sizes-title-sm"
+            onHide={() => setSmShow(false)}
+            aria-labelledby="example-modal-sizes-title-xs"
           >
             <Modal.Header closeButton>
-              <Modal.Title id="example-modal-sizes-title-sm">
+              <Modal.Title id="example-modal-sizes-title-xs">
                 <Form.Group
                   className="mb-1 d-flex align-items-center"
                   controlId="formBasicEmail"
                 >
                   <Form.Control
                     style={{
-                      width: "22.1rem",
+                      width: "17rem",
                       borderRadius: "8px 0 0 8px",
                     }}
                     type="text"
@@ -133,7 +188,7 @@ const History = () => {
 
           {/* modal date picker */}
           <Modal
-            size="xs"
+            size="md"
             show={datepicker}
             onHide={() => setDatepicker(false)}
             centered
@@ -157,8 +212,8 @@ const History = () => {
 
               <Col md={6}>
                 <Row>
-                  <Col className="mb-3">
-                    <Card className="Isi1" style={{ width: "25rem" }}>
+                  <Col md={6} className="mb-4">
+                    <Card className="Isi1" style={{ width: "23rem" }}>
                       <div className="d-flex justify-content-start">
                         {success ? (
                           <div>
@@ -173,7 +228,7 @@ const History = () => {
                       </div>
                       <div
                         className="Isi2"
-                        style={{ boxShadow: "0px 2px rgb(206, 204, 204)" }}
+                        style={{ boxShadow: "1px rgb(206, 204, 204)" }}
                       >
                         <div className="text-center">
                           <p style={{ fontWeight: "700" }}>
@@ -220,8 +275,8 @@ const History = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col md={6}>
-                    <Card className="Isi1" style={{ width: "25rem" }}>
+                  <Col md={6} className="mb-4">
+                    <Card className="Isi1" style={{ width: "23rem" }}>
                       <div className="d-flex justify-content-start">
                         {unpaid ? (
                           <div>
@@ -236,7 +291,7 @@ const History = () => {
                       </div>
                       <div
                         className="Isi2"
-                        style={{ boxShadow: "0px 2px rgb(206, 204, 204)" }}
+                        style={{ boxShadow: "1px rgb(206, 204, 204)" }}
                       >
                         <div className="text-center">
                           <p style={{ fontWeight: "700" }}>
@@ -283,7 +338,7 @@ const History = () => {
                   </Col>
                 </Row>
               </Col>
-              <Col md={6} style={{ width: "25rem" }}>
+              <Col md={6} style={{ width: "23rem" }}>
                 <div>
                   <div
                     className="m-2 pb-1"
@@ -305,7 +360,7 @@ const History = () => {
                     <p>
                       Booking Code: <strong>6723y2GHK</strong>
                     </p>
-                    <div className="Isi2">
+                    <div className="Isi3">
                       <p>
                         <strong>19:10</strong>
                       </p>
@@ -387,7 +442,7 @@ const History = () => {
                           variant="trasparant"
                           style={{
                             padding: "0.5rem",
-                            width: "23rem",
+                            width: "18rem",
                             fontWeight: "700",
                             background: "#A06ECE",
                             color: "white",
@@ -402,7 +457,7 @@ const History = () => {
                           variant="danger"
                           style={{
                             padding: "0.5rem",
-                            width: "23rem",
+                            width: "18rem",
                             fontWeight: "700",
 
                             color: "white",
@@ -425,11 +480,30 @@ const History = () => {
             <Row>
               <Col>
                 <div className="d-flex flex-column justify-content-center align-items-center mt-5">
+                  {/* visible only lg */}
                   <img
+                    className="d-none  d-lg-block"
                     src={Ilustration}
                     alt="ilustration"
-                    style={{ width: "20%" }}
+                    style={{ width: "30%" }}
                   />
+
+                  {/* visible only md */}
+                  <img
+                    className="d-none d-md-block d-lg-none"
+                    src={Ilustration}
+                    alt="ilustration"
+                    style={{ width: "40%" }}
+                  />
+
+                  {/* visible only xs / sm */}
+                  <img
+                    className="d-block d-sm-none"
+                    src={Ilustration}
+                    alt="ilustration"
+                    style={{ width: "50%" }}
+                  />
+
                   <p
                     style={{
                       marginTop: "2rem",
