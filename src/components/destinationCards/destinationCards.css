@@ -1,6 +1,7 @@
 .destination_favorite {
-    margin: 2rem auto;
+    margin: 0 auto;
     width: 65vw;
+    margin-top: 25%;
 }
 
 .destination_favorite h6 {
