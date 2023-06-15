@@ -7,10 +7,12 @@ import Register from './pages/register/Register'
 import Search from './pages/search/Search'
 import Booking from './pages/booking/Booking'
 import History from './pages/history/History'
+import Navbar from './components/navbar/Navbar';
 
 function App() {
   return (
     <BrowserRouter>
+    <Navbar />
       <Routes>
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
