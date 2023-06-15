@@ -2,12 +2,23 @@ import React, { useState } from 'react'
 import './search.css'
 import ResultItem from '../../components/resultItem/ResultItem'
 
-import {  ArrowBack, AttachMoney, FavoriteBorder, NavigateNext, SwapVert, ViewInAr } from '@mui/icons-material'
+import pencarianNull from '../../assets/images/pencariannull.png'
+
+import {  ArrowBack, KeyboardArrowDown, SwapVert } from '@mui/icons-material'
+import SearchFilterUrutan from '../../components/searchFilterUrutan/SearchFilterUrutan'
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import SearchFilterItem from '../../components/searchFilterItem/SearchFilterItem'
 
 
 const Search = () => {
 
   const filterUrutan = "Termurah"
+
+  const [openFilterModal, setOpenFilterModal] = useState(false)
 
   const pencarian = {
     kotaAwal :  "jakarta",
@@ -22,23 +33,27 @@ const Search = () => {
             date: '02/03/2002'
         },
         {
-            display: 'Senin',
+            display: 'Selasa',
             date: '02/03/2002'
         },
         {
-            display: 'Senin',
+            display: 'Rabu',
             date: '02/03/2002'
         },
         {
-            display: 'Senin',
+            display: 'Kamis',
             date: '02/03/2002'
         },
         {
-            display: 'Senin',
+            display: 'Jumat',
             date: '02/03/2002'
         },
         {
-            display: 'Senin',
+            display: 'Sabtu',
+            date: '02/03/2002'
+        },
+        {
+            display: 'Minggu',
             date: '02/03/2002'
         },
         {
@@ -149,65 +164,76 @@ const Search = () => {
           <div className="searchResult">
             <div className="searchResultMenu">
               <ArrowBack onClick={() => window.history.back()} className="searchBtnBack"/>
-              <p className="searchResultText">{pencarian.kotaAwal} &#62; {pencarian.kotaAkhir} - {pencarian.jumlahPenumpang} Penumpang - {pencarian.jenisPesawat}</p>
+              <div className="searchResultText">
+                <p>{pencarian.kotaAwal} &#62; {pencarian.kotaAkhir} </p> 
+                <span className='searchResultTextSub1'> &#160; - {pencarian.jumlahPenumpang} Penumpang - {pencarian.jenisPesawat}</span>
+                <span className='searchResultTextSub2'>{pencarian.jumlahPenumpang} Penumpang - {pencarian.jenisPesawat}</span>
+              </div>
             </div>
             <div className="searchBtnUbah">
               <p>Ubah Pencarian</p>
+              <div className="searchBtnUbahBtn"><KeyboardArrowDown/></div>
             </div>
           </div>
           <div className="searchResultDate">
+            <Swiper
+              breakpoints={{
+                320 :{
+                  slidesPerView : 3
+                },
+                600 :{
+                  slidesPerView : 5
+                },
+                1024 : {
+                  slidesPerView : 7
+                }
+              }}
+              slidesPerView={7}
+              spaceBetween={0}
+              loop = {true}
+              modules={[Pagination]}
+              className="mySwiper"
+            >
             {
-              calendar.map((e, i) => (
-                            <div key={i} className="pickDate">
+            calendar.map((e, i) => (
+                            <SwiperSlide key={i} className='pickDate'>
                               <p className='searchResultDateDay'>{e.display}</p>
                               <p className='searchResultDateDate'>{e.date}</p>
-                            </div>
-                            ))
+                            </SwiperSlide>
+                          ))
             }
+            </Swiper>
           </div>
         </div>
         </div>
         <div className="searchContainer">
           <div className="searchFilterUrutan">
-            <div className="searchFilterUrutanItem">
+            <div className="searchItemLeftComponent">
+              <SearchFilterItem />
+            </div>
+            <div className="searchFilterUrutanItem" onClick={() => setOpenFilterModal(!openFilterModal)}>
               <SwapVert className='searchFilterUrutanBtn'/>
               <p className="searchFilterUrutanText">{filterUrutan}</p>
             </div>
+            {openFilterModal &&
+              <SearchFilterUrutan />
+            }
           </div>
           <div className="searchItem">
             <div className="searchItemLeft">
-              <h3 className="searchItemLeftTitle">
-                Filter
-              </h3>
-              <div className="searchFilterItems">
-                <div className="searchFilterItem">
-                  <span className='searchFilterItemLogo'><ViewInAr/></span>
-                  <p className='searchFilterItemText'>Transit</p>
-                  <span className='searchFilterItemArrow'><NavigateNext/></span>
-                </div>
-                <div className="searchFilterItemsLine">
-
-                </div>
-                <div className="searchFilterItem">
-                  <span className='searchFilterItemLogo'><FavoriteBorder/></span>
-                  <p className='searchFilterItemText'>Fasilitas</p>
-                  <span className='searchFilterItemArrow'><NavigateNext/></span>
-                </div>
-                <div className="searchFilterItemsLine">
-                  
-                </div>
-                <div className="searchFilterItem">
-                  <span className='searchFilterItemLogo'><AttachMoney/></span>
-                  <p className='searchFilterItemText'>Harga</p>
-                  <span className='searchFilterItemArrow'><NavigateNext/></span>
-                </div>
-              </div>
+              <SearchFilterItem/>
             </div>
             <div className="searchItemRight">
                 {
-                  items.map((e, i) => (
+                  items.length !== 0? items.map((e, i) => (
                                 <ResultItem key={i} data={e}/>
                                 ))
+                                :
+                                <div className="nullData">
+                                  <img className='nullDataImg' src={pencarianNull} alt="" />
+                                  <p className="nullDataTitle">Maaf, pencarian anda tidak ditemukan</p>
+                                  <p className="nullDataSubTitle">Coba cari perjalanan lainnya</p>
+                                </div>
                 }
               
             </div>

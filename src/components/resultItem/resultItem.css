@@ -1,4 +1,9 @@
 .isOpen{
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    border-radius: 8px;
+    padding: 16px;
     box-shadow: 0px 0px 4px var(--primary5);
 }
 
@@ -48,6 +53,7 @@
 .resultItemUp,.resultItemDown{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
 }
 
@@ -96,13 +102,26 @@
 }
 
 .resultItemRight button{
-    color: white;
+    color: var(--neutral1);
     font-weight: 500;
     font-size: 16px;    
     padding: 3.5px 33px;
     border: 1px solid var(--primary4);
     border-radius: 12px;
     background-color: var(--primary4);
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
+
+.resultItemRight button:hover{
+    color: var(--neutral1);
+    font-weight: 500;
+    font-size: 16px;    
+    padding: 3.5px 33px;
+    border: 1px solid var(--primary5);
+    border-radius: 12px;
+    background-color: var(--primary5);
+    cursor: pointer;
 }
 
 .resultItemDetail{
@@ -212,4 +231,89 @@
 .resultItemDetailPlaneInformationItem{
     font-weight: 400;
     font-size: 14px;
+}
+
+@media only screen and (max-width:600px) {
+
+    .resultItem{
+        gap: 10px;
+    }
+
+    .resultItemLeft{
+        flex: 2;
+    }
+
+    .resultItemCenter{
+        display: none
+    }    
+
+    .resultItemRight{
+        flex: 1;
+    }
+
+    .resultItemRightPrice{
+        font-weight: 700;
+        font-size: 12px;
+    }
+
+    .resultItemUpDepartureJam, .resultItemUpArrivalJam{
+        font-size: 12px;
+    }
+
+    .resultItemUpDuration, .resultItemDownTransit{
+        font-size: 10px;
+    }
+
+    .resultItemDownDepartureAirport, .resultItemDownArrivalAirport{
+        font-weight: 500;
+        font-size: 11px;
+        color: var(--neutral5);
+    }
+
+    .resultItemUpDownLine{
+        width: 60%;
+    }
+
+    .resultItemRight button{
+        font-size: 12px;    
+        padding: 3.5px 33px;
+    }
+}
+
+@media only screen and (max-width:1024px){
+    .resultItem{
+        gap: 10px;
+    }
+
+    .resultItemLeft{
+        flex: 3;
+    }
+
+    .resultItemCenter{
+        display: 1;
+    }    
+
+    .resultItemRight{
+        flex: 2;
+    }
+
+    .resultItemRightPrice{
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .resultItemDownDepartureAirport, .resultItemDownArrivalAirport{
+        font-weight: 500;
+        font-size: 11px;
+        color: var(--neutral5);
+    }
+
+    .resultItemUpDownLine{
+        width: 60%;
+    }
+
+    .resultItemRight button{
+        font-size: 12px;    
+        padding: 3.5px 33px;
+    }
 }
