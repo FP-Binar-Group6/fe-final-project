@@ -74,7 +74,6 @@
     z-index: -5;
 
 }
-
 @media screen and (max-width: 1024px) {
     .homepage__container {
         width: var(--container-width-md);
