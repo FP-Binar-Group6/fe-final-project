@@ -15,13 +15,16 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-
-        <Route path="/" element={<Homepage />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/booking" element={<Booking />} />
-        <Route path="/history" element={<History />} />
+        <Route path='/login' element={<Login/>} />
+        <Route path='/register' element={<Register/>} />
+        
+        <Route path='/' element={<Homepage/>} />
+        <Route path='/search' element={<Search/>} />
+        <Route path='/booking' element={<Booking/>} />
+        <Route path='/booking/checkout' element={<Booking/>} />
+        <Route path='/booking/payment' element={<Booking/>} />
+        <Route path='/booking/success' element={<Booking/>} />
+        <Route path='/history' element={<History/>} />
         <Route path="/notifikasi" element={<Notifikasi />} />
       </Routes>
     </BrowserRouter>
