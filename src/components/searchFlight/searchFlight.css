@@ -8,7 +8,7 @@
     padding: 24px;
     width: 65vw;
     margin: 0 auto;
-    top: 10rem;
+    top: 8rem;
     margin-left: 5rem;
     position: absolute;
     z-index: 10;
@@ -312,7 +312,7 @@
     width: 65vw;
     margin: 0 auto;
     position: absolute;
-    bottom: -13rem;
+    bottom: -12rem;
     z-index: 11;
     margin-left: 5rem;
 }

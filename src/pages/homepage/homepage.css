@@ -35,7 +35,7 @@
     --shadow-high: 0px 0px 10px rgba(0, 0, 0, 0.15);
     --text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-    --container-width-lg: 80%;
+    --container-width-lg: 100%;
     --container-width-md: 90%;
     --container-width-sm: 94%;
 
@@ -45,7 +45,7 @@
     width: var(--container-width-lg);
     margin: 0 auto;
     padding-top: 10%;
-    color: var(--neutral-5);
+    color: var(--neutral-5);   
 }
 
 
@@ -57,22 +57,25 @@
     height: 13rem;
     display: flex;
     align-items: center;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .banner img {
     width: 80vw;
     position: absolute;
     z-index: -1;
+    margin: 0 auto;
 }
 
 .background__banner {
     background-image: linear-gradient(to right, rgba(113, 38, 181, 0.5), var(--primary-purple-1));
-    width: 100%;
-    margin-left: -10rem;
-    padding: 0 33rem; 
+    width: 100vw;
+    margin-top: 2rem;
     height: 100px;
     z-index: -5;
-
 }
 @media screen and (max-width: 1024px) {
     .homepage__container {
