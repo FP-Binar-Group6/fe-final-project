@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./searchFlight.css"
+import "./searchFlight.css";
 
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import DateRangeIcon from "@mui/icons-material/DateRange";
