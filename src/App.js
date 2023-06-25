@@ -10,8 +10,13 @@ import History from "./pages/history/History";
 import Navbar from "./components/navbar/Navbar";
 import Notifikasi from "./pages/notifikasi/Notifikasi";
 
+import { Provider } from "react-redux";
+import "react-toastify/dist/ReactToastify.css";
+import store from "./redux/store";
+
 function App() {
   return (
+    <Provider store={store}>
     <BrowserRouter>
       <Navbar />
       <Routes>
@@ -28,6 +33,7 @@ function App() {
         <Route path="/notifikasi" element={<Notifikasi />} />
       </Routes>
     </BrowserRouter>
+    </Provider>
   );
 }
 

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./searchFlight.css"
+import React, { useEffect, useState } from "react";
+import "./searchFlight.css";
 
 import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
 import DateRangeIcon from "@mui/icons-material/DateRange";
@@ -16,6 +16,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangeCalendar } from "@mui/x-date-pickers-pro/DateRangeCalendar";
+import { format } from "date-fns";
+import { Calendar } from "react-date-range";
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
+import { useDispatch, useSelector } from "react-redux";
+
+import { getPostAirport } from "../../redux/actions/post";
 
 const SearchFlight = () => {
   const [showSwitch, setshowSwitch] = useState(false);
@@ -23,9 +30,17 @@ const SearchFlight = () => {
   const [openSeatClass, setopenSeatClass] = useState(false);
   const [openDestinationFrom, setopenDestinationFrom] = useState(false);
   const [openDestinationTo, setopenDestinationTo] = useState(false);
-  const [openDate, setopenDate] = useState(false);
+  const [openDateDeparture, setopenDateDeparture] = useState(false);
+  const [openDateReturn, setopenDateReturn] = useState(false);
+  const [calenderDeparture, setCalenderDeparture] = useState("");
+  const [calenderReturn, setCalenderReturn] = useState("");
 
-  const [seatClass, setseatClass] = useState("");
+  const [filterNameTo, setFilterNameTo] = useState("");
+  const [filterNameFrom, setFilterNameFrom] = useState("");
+  const [destinationItem, setDestinationItem] = useState("")
+  const [destinationItemTo, setDestinationItemTo] = useState("")
+
+  const [seatClass, setSeatClass] = useState("");
   const [passenger, setPassenger] = useState({
     adult: 1,
     children: 0,
@@ -42,6 +57,30 @@ const SearchFlight = () => {
     });
   };
 
+  const submitPassenger = (e) => {
+    e.preventDefault();
+    setopenPassenger(false)
+  }
+
+  const handleCalenderDeparture = (date) =>{
+    console.log(date);
+    setCalenderDeparture(format(date, "MM/dd/yyyy"))
+  }
+  const handleCalenderReturn = (date) =>{
+    console.log(date);
+    setCalenderReturn(format(date, "MM/dd/yyyy"))
+  }
+
+  // dispatch -> to change the global state in redux
+  const dispatch = useDispatch();
+
+  // useSelector -> to access the global state (redux)
+  const { posts } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    dispatch(getPostAirport());
+  }, [dispatch]);
+
   return (
     <>
       <div className="search_flight_container">
@@ -57,14 +96,14 @@ const SearchFlight = () => {
               className="destination__from__to_input"
               onClick={() => setopenDestinationFrom(!openDestinationFrom)}
             >
-              {`Jakarta`}
+               {destinationItem} 
             </span>
             {openDestinationFrom && (
               <div className="destination_options">
                 <div className="search_field_area">
                   <div className="search_field">
                     <SearchIcon style={{ color: "#D0D0D0" }} />
-                    <input placeholder="Masukkan Kota atau Negara" />
+                    <input placeholder="Masukkan Kota atau Negara"  type="text" value={filterNameFrom} onChange={(e)=>setFilterNameFrom(e.target.value)}/>
                   </div>
                   <CloseIcon onClick={() => setopenDestinationFrom(false)} />
                 </div>
@@ -72,22 +111,15 @@ const SearchFlight = () => {
                   <p>Pencarian Terkini</p>
                   <span>Hapus</span>
                 </div>
-                <div className="latestSeachItem">
+                {getPostAirport.cityName.filter((airport)=>airport.cityName === filterNameFrom) &&
+                  <div className="latestSeachItem" onClick={(e)=>setDestinationItem("Jakarta")}>
                   <label>Jakarta</label>
                   <CloseIcon style={{ color: "#8A8A8A" }} />
                 </div>
-                <hr />
-                <div className="latestSeachItem">
-                  <label>Bandung</label>
-                  <CloseIcon style={{ color: "#8A8A8A" }} />
-                </div>
-                <hr />
-                <div className="latestSeachItem">
-                  <label>Surabaya</label>
-                  <CloseIcon style={{ color: "#8A8A8A" }} />
-                </div>
+                }
                 <hr />
               </div>
+              
             )}
           </div>
 
@@ -102,14 +134,14 @@ const SearchFlight = () => {
               className="destination__from__to_input"
               onClick={() => setopenDestinationTo(!openDestinationTo)}
             >
-              {`JKT`}
+              {destinationItemTo}
             </span>
             {openDestinationTo && (
               <div className="destination_options">
                 <div className="search_field_area">
                   <div className="search_field">
                     <SearchIcon style={{ color: "D0D0D0" }} />
-                    <input placeholder="Masukkan Kota atau Negara" />
+                    <input placeholder="Masukkan Kota atau Negara" type="text" value={filterNameTo} onChange={(e)=>setFilterNameTo(e.target.value)}/>
                   </div>
                   <CloseIcon onClick={() => setopenDestinationTo(false)} />
                 </div>
@@ -117,8 +149,8 @@ const SearchFlight = () => {
                   <p>Pencarian Terkini</p>
                   <span>Hapus</span>
                 </div>
-                <div className="latestSeachItem">
-                  <label>Economy</label>
+                <div className="latestSeachItem" onClick={(e)=>setDestinationItemTo("Jakarta")}>
+                  <label>Jakarta</label>
                   <CloseIcon style={{ color: "#8A8A8A" }} />
                 </div>
                 <hr />
@@ -135,19 +167,19 @@ const SearchFlight = () => {
               <label>Departure</label>
               <span
                 className="departure_input"
-                onClick={() => setopenDate(!openDate)}
+                onClick={() => setopenDateDeparture(!openDateDeparture)}
+                value={calenderDeparture}
               >
-                {``}
+                {calenderDeparture}
               </span>
-              {openDate && (
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+              {openDateDeparture && (
                   <div
                     components={["DateRangeCalendar"]}
                     className="date_options"
                   >
-                    <DateRangeCalendar />
+                  <Calendar onChange={handleCalenderDeparture} date={new Date()} className="CalendarElement" color="#7126B5" />
+                    {/* <DateRangeCalendar onChange={handleCalender} date = {new Date()}/> */}
                   </div>
-                </LocalizationProvider>
               )}
             </div>
             {showSwitch ? (
@@ -155,10 +187,20 @@ const SearchFlight = () => {
                 <label>Return</label>
                 <span
                   className="return_input"
-                  onClick={() => setopenDate(!openDate)}
+                  onClick={() => setopenDateReturn(!openDateReturn)}
+                  value={calenderReturn}
                 >
-                  {``}
+                  {calenderReturn}
                 </span>
+              {openDateReturn && (
+                  <div
+                    components={["DateRangeCalendar"]}
+                    className="date_options"
+                  >
+                  <Calendar onChange={handleCalenderReturn} className="CalendarElement" date={new Date()} color="#7126B5" disabledDays={{ before: new Date() }}/>
+                    {/* <DateRangeCalendar onChange={handleCalender} date = {new Date()}/> */}
+                  </div>
+              )}
               </div>
             ) : null}
 
@@ -278,7 +320,7 @@ const SearchFlight = () => {
                   </div>
                   <hr />
                   <div className="save_passenger">
-                    <button>Simpan</button>
+                    <button onClick={submitPassenger}>Simpan</button>
                   </div>
                 </div>
               )}
@@ -298,7 +340,7 @@ const SearchFlight = () => {
                   <CloseIcon onClick={() => setopenSeatClass(false)} />
                   <hr />
                   <div className="seat_optionItem">
-                    <div className="seat_option_text">
+                    <div className="seat_option_text" onClick={()=>setSeatClass("Economy")}>
                       <label>Economy</label>
                       <p>IDR 4.950.000</p>
                     </div>
@@ -308,7 +350,7 @@ const SearchFlight = () => {
                   </div>
                   <hr />
                   <div className="seat_optionItem">
-                    <div className="seat_option_text">
+                    <div className="seat_option_text" onClick={()=>setSeatClass("Premium Economy")}>
                       <label>Premium Economy</label>
                       <p>IDR 7.550.000</p>
                     </div>
@@ -318,7 +360,7 @@ const SearchFlight = () => {
                   </div>
                   <hr />
                   <div className="seat_optionItem">
-                    <div className="seat_option_text">
+                    <div className="seat_option_text" onClick={()=>setSeatClass("Business")}>
                       <label>Business</label>
                       <p>IDR 29.220.000</p>
                     </div>
@@ -328,7 +370,7 @@ const SearchFlight = () => {
                   </div>
                   <hr />
                   <div className="seat_optionItem">
-                    <div className="seat_option_text">
+                    <div className="seat_option_text" onClick={()=>setSeatClass("First Class")}>
                       <label>First Class</label>
                       <p>IDR 87.620.000</p>
                     </div>
@@ -338,7 +380,7 @@ const SearchFlight = () => {
                   </div>
                   <hr />
                   <div className="save_seatClass">
-                    <button>Simpan</button>
+                    <button onClick={()=>setopenSeatClass(!openSeatClass)}>Simpan</button>
                   </div>
                 </div>
               )}
