@@ -49,6 +49,7 @@
     border-radius: 4px;
     width: 90%;
     padding: 0.5rem 1rem;
+    color: var(--neutral3);
 }
 
 .list__switch {

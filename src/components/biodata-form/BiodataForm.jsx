@@ -19,8 +19,11 @@ const BiodataForm = ({ isCheckout }) => {
 
   const [namaPenumpang, setNamaPenumpang] = useState("");
   const [lastNamePenumpang, setLastNamePenumpang] = useState("");
-  const [teleponPenumpang, setTeleponPenumpang] = useState("");
-  const [emailPenumpang, setEmailPenumpang] = useState("");
+  const [lahir, setLahir] = useState("");
+  const [kewarganegaraan, setKewarganegaraan] = useState("");
+  const [paspor, setPaspor] = useState("");
+  const [penerbit, setPenerbit] = useState("");
+  const [berlaku, setBerlaku] = useState("");
 
   const onBooking = (e) => {
     e.preventDefault();
@@ -88,7 +91,7 @@ const BiodataForm = ({ isCheckout }) => {
                 <p>Email</p>
                 <input
                   type="email"
-                  placeholder="Email"
+                  placeholder="Contoh: johndoe@gmail.com"
                   disabled={isCheckout ? true : false}
                   value={emailPemesan}
                   onChange={(e) => setEmailPemesan(e.target.value)}
@@ -156,23 +159,51 @@ const BiodataForm = ({ isCheckout }) => {
                 />
               </div>
               <div className="list__input">
-                <p>Nomor Telepon</p>
+                <p>Tanggal Lahir</p>
                 <input
-                  type="text"
-                  placeholder="Nomor Telepon"
+                  type="date"
                   disabled={isCheckout ? true : false}
-                  value={teleponPenumpang}
-                  onChange={(e) => setTeleponPenumpang(e.target.value)}
+                  value={lahir}
+                  onChange={(e) => setLahir(e.target.value)}
                 />
               </div>
               <div className="list__input">
-                <p>Email</p>
+                <p>Kewarganegaraan</p>
                 <input
-                  type="email"
-                  placeholder="Email"
+                  type="text"
+                  placeholder="Kewarganegaraan"
                   disabled={isCheckout ? true : false}
-                  value={emailPenumpang}
-                  onChange={(e) => setEmailPenumpang(e.target.value)}
+                  value={kewarganegaraan}
+                  onChange={(e) => setKewarganegaraan(e.target.value)}
+                />
+              </div>
+              <div className="list__input">
+                <p>KTP/Paspor</p>
+                <input
+                  type="text"
+                  placeholder="KTP/Paspor"
+                  disabled={isCheckout ? true : false}
+                  value={paspor}
+                  onChange={(e) => setPaspor(e.target.value)}
+                />
+              </div>
+              <div className="list__input">
+                <p>Negara Penerbit</p>
+                <input
+                  type="text"
+                  placeholder="Negara Penerbit"
+                  disabled={isCheckout ? true : false}
+                  value={penerbit}
+                  onChange={(e) => setPenerbit(e.target.value)}
+                />
+              </div>
+              <div className="list__input">
+                <p>Berlaku Sampai</p>
+                <input
+                  type="date"
+                  disabled={isCheckout ? true : false}
+                  value={berlaku}
+                  onChange={(e) => setBerlaku(e.target.value)}
                 />
               </div>
             </div>

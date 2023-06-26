@@ -29,7 +29,7 @@ const Navbar = () => {
             <NotificationsNoneIcon
               sx={{ fontSize: 24 }}
               style={pointer}
-              onClick={() => navigate("/notification")}
+              onClick={() => navigate("/notifikasi")}
             />
             <PersonOutlineOutlinedIcon
               sx={{ fontSize: 24 }}
