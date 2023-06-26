@@ -16,6 +16,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangeCalendar } from "@mui/x-date-pickers-pro/DateRangeCalendar";
+// Link Sementara
+import { Link } from "react-router-dom";
+import { FlightLand } from "@mui/icons-material";
 
 const SearchFlight = () => {
   const [showSwitch, setshowSwitch] = useState(false);
@@ -32,6 +35,22 @@ const SearchFlight = () => {
     baby: 0,
   });
 
+  const city = [
+    {
+      cityName : "Jakarta"
+    },
+    {
+      cityName : "Bandung"
+    },
+    {
+      cityName : "Bali"
+    },
+    {
+      cityName : "Malang"
+    },
+
+  ]
+
   const handleOption = (name, operation) => {
     setPassenger((prev) => {
       return {
@@ -41,6 +60,7 @@ const SearchFlight = () => {
       };
     });
   };
+  
 
   return (
     <>
@@ -57,7 +77,7 @@ const SearchFlight = () => {
               className="destination__from__to_input"
               onClick={() => setopenDestinationFrom(!openDestinationFrom)}
             >
-              {`Jakarta`}
+              {'Jakarta'}
             </span>
             {openDestinationFrom && (
               <div className="destination_options">
@@ -72,21 +92,13 @@ const SearchFlight = () => {
                   <p>Pencarian Terkini</p>
                   <span>Hapus</span>
                 </div>
-                <div className="latestSeachItem">
-                  <label>Jakarta</label>
-                  <CloseIcon style={{ color: "#8A8A8A" }} />
-                </div>
-                <hr />
-                <div className="latestSeachItem">
-                  <label>Bandung</label>
-                  <CloseIcon style={{ color: "#8A8A8A" }} />
-                </div>
-                <hr />
-                <div className="latestSeachItem">
-                  <label>Surabaya</label>
-                  <CloseIcon style={{ color: "#8A8A8A" }} />
-                </div>
-                <hr />
+                  { city.map((e, i) => (
+                    <div className="latestSeachItem"> 
+                      <label key={i}>{e.cityName}</label>
+                      <CloseIcon style={{ color: "#8A8A8A" }} />
+                    </div>
+                  ))
+                  }
               </div>
             )}
           </div>
@@ -96,7 +108,7 @@ const SearchFlight = () => {
           </div>
 
           <div className="destination__from__to">
-            <FlightTakeoffIcon className="icon" />
+            <FlightLand className="icon" />
             <p>To</p>
             <span
               className="destination__from__to_input"
@@ -117,11 +129,13 @@ const SearchFlight = () => {
                   <p>Pencarian Terkini</p>
                   <span>Hapus</span>
                 </div>
-                <div className="latestSeachItem">
-                  <label>Economy</label>
-                  <CloseIcon style={{ color: "#8A8A8A" }} />
-                </div>
-                <hr />
+                  { city.map((e, i) => (
+                    <div className="latestSeachItem">
+                      <label key={i}>{e.cityName}</label>
+                      <CloseIcon style={{ color: "#8A8A8A" }} />
+                    </div>
+                  ))
+                  }
               </div>
             )}
           </div>
@@ -160,7 +174,10 @@ const SearchFlight = () => {
                   {``}
                 </span>
               </div>
-            ) : null}
+            ) : <div className="returnNotOpen">
+              </div>}
+
+          </div>
 
             <div class="form-check form-switch">
               <input
@@ -171,7 +188,7 @@ const SearchFlight = () => {
                 onClick={() => setshowSwitch(!showSwitch)}
               />
             </div>
-          </div>
+          
 
           <div className="passenger_container">
             <AirlineSeatReclineNormalIcon className="icon" />
@@ -183,7 +200,7 @@ const SearchFlight = () => {
                 onClick={() => setopenPassenger(!openPassenger)}
               >
                 {`${
-                  passenger.adult + passenger.children + passenger.baby
+                  passenger.adult + passenger.children
                 } Penumpang`}
               </span>
 
@@ -345,9 +362,12 @@ const SearchFlight = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="search_button">
-        <button>Cari Penerbangan</button>
+        <div className="search_button">
+          {/* Link sementara */}
+          <Link to="/search">
+            <button>Cari Penerbangan</button>
+          </Link>
+        </div>
       </div>
     </>
   );

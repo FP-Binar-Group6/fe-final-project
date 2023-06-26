@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const pointer = { cursor: "pointer" };
   return (
-    <div className="navbar">
+    <div className="navbarr">
       {isLoggedIn ? (
         <div className="navbar__container">
           <Link to="/" className="navbar__logo">
@@ -29,7 +29,7 @@ const Navbar = () => {
             <NotificationsNoneIcon
               sx={{ fontSize: 24 }}
               style={pointer}
-              onClick={() => navigate("/notification")}
+              onClick={() => navigate("/notifikasi")}
             />
             <PersonOutlineOutlinedIcon
               sx={{ fontSize: 24 }}

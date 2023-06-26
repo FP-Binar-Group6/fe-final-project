@@ -1,5 +1,15 @@
 * {
+    /* margin: 0; */
     margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body p{
+    margin-bottom: 0rem;
+}
+
+body .margin {
+    position: fixed;
 }
 
 :root {

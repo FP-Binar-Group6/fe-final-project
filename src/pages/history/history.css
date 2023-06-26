@@ -1,3 +1,7 @@
+.history{
+  padding-top: 6%;
+}
+
 .Isi1 {
   background-color: white;
   border-radius: 8px;
@@ -21,3 +25,5 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+/* test */
