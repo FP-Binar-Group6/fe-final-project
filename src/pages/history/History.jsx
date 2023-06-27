@@ -13,8 +13,8 @@ import {
   Card,
 } from "react-bootstrap";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import Ilustration from "./Ilustration.png";
-import logo from "./logo.png";
+import Ilustration from "../../assets/Ilustration.png";
+import logo from "../../assets/logo.png";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import DatePickerRanger from "../../components/datepicker/DatePickerRange";
@@ -33,7 +33,7 @@ const History = () => {
       {/* Header */}
       <Container
         fluid
-        className="my-2 pb-3 "
+        className="history my-2 pb-3 "
         style={{ boxShadow: "0px 2px rgb(206, 204, 204)" }}
       >
         <Row className="d-flex justify-content-center">

@@ -1,31 +1,27 @@
 .Login {
     height: 100vh;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
 }
 
 .bg-login{
-    flex: 50%;
-    height: 100%;
+    flex: 1;
     width: 100%;
-}
- 
-.bg-login img{
-    width: 50%;
+    object-fit: cover;
     height: 100vh;
 }
 
 .login-form {
-    flex: 50%;
-    position: absolute;
-    width: 452px;
-    height: 348px;
-    left: 854px;
-    top: 200px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .login-form .h2 {
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -33,18 +29,23 @@
     margin-bottom: 20px;
 }
 
+.email-input {
+    padding: 10px;
+}
+
 .login-form form {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     padding: 0px;
     gap: 16px;
+    /* width: 100%; */
 }
 
 .password {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
     padding: 0px;
     gap: 4px;
 }
@@ -56,6 +57,7 @@
 
 .password-input input {
     padding-right: 40px;
+    padding : 10px 40px 10px 10px;
     /* Menyesuaikan ruang untuk ikon visibility */
 }
 
@@ -73,7 +75,6 @@
 
 
 .password a {
-    margin-left: 260px;
     font-family: 'Poppins';
     font-style: normal;
     font-size: 12px;
@@ -112,28 +113,97 @@
 }
 
 @media screen and (max-width: 600px) {
-    .Login {
-        display: contents;
-        flex: none;
-        height: auto;
-      }
+    .login{
+        position: relative;
+        height: 100vh;
+    }
+
       .bg-login{
-        height: auto;
-        width: auto;
-    
+        height: fit-content;
+        width: fit-content;
+        opacity: 70%;
+        object-fit: contain;
+        overflow:hidden ;
       }
-      .login img{
+
+      /* .login img{
         width: 100%;
         height: 100%;
+        
         z-index: 1;
+      } */
+
+      .bg-login{
+        
       }
     
       .login-form {
-        position: static;
-        width: auto;
-        height: auto;
-        margin-top: -300px;
-        padding: 0 20px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        /* background: white; */
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 5%;
+        height: fit-content;
+        width: fit-content;
+        padding: 20px;
+      }
+    
+      .login-form input,
+      .btn-signin {
+        width: 100%;
+      }
+    
+}
+
+
+@media only screen and (max-width:1024px) and (min-width:600px) {
+    .login{
+        position: relative;
+        height: 100vh;
+    }
+
+      .bg-login{
+        height: fit-content;
+        width: 100vh;
+        /* opacity: 70%; */
+        object-fit: cover;
+        overflow: hidden ;
+      }
+
+      /* .login img{
+        width: 100%;
+        height: 100%;
+        
+        z-index: 1;
+      } */
+
+      .bg-login{
+        
+      }
+    
+      .login-form {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        /* background: white; */
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 5%;
+        height: fit-content;
+        width: fit-content;
+        padding: 20px;
+      }
+
+      .login-form form {
+        width: 500px;
       }
     
       .login-form input,
@@ -141,10 +211,4 @@
         width: 100%;
       }
 
-      .password a {
-        margin-left: 150px;
-        
-    }
-    
-    
 }

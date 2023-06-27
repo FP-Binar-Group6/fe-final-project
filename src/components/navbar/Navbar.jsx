@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const pointer = { cursor: "pointer" };
   return (
-    <div className="navbar">
+    <div className="navbarr">
       {isLoggedIn ? (
         <div className="navbar__container">
           <Link to="/" className="navbar__logo">

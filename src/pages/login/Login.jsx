@@ -12,14 +12,12 @@ const Login = () => {
 
   return (
     <div className='Login'>
-      <div className= "bg-login">
-      <img src={auth}/>
-      </div>
+      <img className='bg-login' src={auth}/>
       <div className='login-form'>
         <h2>Masuk</h2>
         <form>
           <p>Email/No Telepon</p>
-          <input placeholder='contoh: johndoe@gmail.com' />
+          <input className='email-input' placeholder='contoh: johndoe@gmail.com' />
           <label className='password'>
             <p>Password</p>
             <a href=''> lupa kata sandi?</a>
@@ -41,7 +39,7 @@ const Login = () => {
         <div className='regist-account'>
           <p>Belum punya akun?
           </p>
-          <a href={'register'}>Daftar di si ni</a>
+          <a href={'register'}>Daftar di sini</a>
         </div>
       </div>
     </div>

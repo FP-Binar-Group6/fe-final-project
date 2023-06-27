@@ -10,13 +10,13 @@ const Register = () => {
         <h2>Daftar</h2>
         <form>
           <p>nama</p>
-          <input type='contoh: johndoe@gmial.com' />
+          <input placeholder='Nama' />
           <p>Email</p>
-          <input type='contoh: johndoe@gmial.com' />
+          <input placeholder='contoh: johndoe@gmial.com' />
           <p>Nomor Telepon</p>
-          <input type='contoh: johndoe@gmial.com' />
-          <p>Buat Password</p>
-          <input type='Masukkan Password'></input>
+          <input placeholder='Nomor Telepon' />
+          <p>Password</p>
+          <input placeholder='Masukkan Password'></input>
           <button className='btn-register'>Masuk</button>
         </form>
         <div className='regist-account'>

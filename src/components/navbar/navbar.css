@@ -1,11 +1,11 @@
-.navbar {
+.navbarr {
     height: 5rem;
     background: var(--neutral1);
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    z-index: 99;
+    width: 100%;
+    z-index: 999;
     box-shadow: 0 0.2rem 0.2rem var(--neutral2);
 }
 

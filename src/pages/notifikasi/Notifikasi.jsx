@@ -5,9 +5,9 @@ import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DatePickerRanger from "../../components/datepicker/DatePickerRange";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import Ellipse from "./Ellipse.png";
+import Ellipse from "../../assets/Ellipse.png";
 import "./notifikasi.css";
-import EllipseDanger from "./EllipseDanger.png";
+import EllipseDanger from "../../assets/EllipseDanger.png";
 
 function Notifikasi() {
   const [smShow, setSmShow] = useState(false);
@@ -18,7 +18,7 @@ function Notifikasi() {
       {/* Header */}
       <Container
         fluid
-        className="my-2 pb-3 "
+        className="notifikasi my-5 pb-3 "
         style={{ boxShadow: "0px 2px rgb(206, 204, 204)" }}
       >
         <Row className="d-flex justify-content-center">

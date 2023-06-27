@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './search.css'
 import ResultItem from '../../components/resultItem/ResultItem'
 
@@ -12,6 +12,9 @@ import { Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import SearchFilterItem from '../../components/searchFilterItem/SearchFilterItem'
+import SearchFlight from '../../components/searchFlight/SearchFlight'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSchedules } from '../../redux/actions/schedule'
 
 
 const Search = () => {
@@ -19,6 +22,8 @@ const Search = () => {
   const filterUrutan = "Termurah"
 
   const [openFilterModal, setOpenFilterModal] = useState(false)
+  const [ubahPencarianOpen, setUbahPencarianOpen] = useState(false)
+  const [showMore, setShowmore]= useState(false)
 
   const pencarian = {
     kotaAwal :  "jakarta",
@@ -65,8 +70,8 @@ const Search = () => {
   const items = [
     {
       detailPesawat: {
-        nomorPesawat: "QZ-851",
-        namaPesawat : "air asia",
+        nomorPesawat: "GA-851",
+        namaPesawat : "Garuda",
         jenisPesawat: "ekonomi",
       },
       detailTerbang : {
@@ -109,8 +114,8 @@ const Search = () => {
     },
     {
       detailPesawat: {
-        nomorPesawat: "QZ-851",
-        namaPesawat : "air asia",
+        nomorPesawat: "JT-851",
+        namaPesawat : "Lion",
         jenisPesawat: "ekonomi",
       },
       detailTerbang : {
@@ -131,8 +136,8 @@ const Search = () => {
     },
     {
       detailPesawat: {
-        nomorPesawat: "QZ-851",
-        namaPesawat : "air asia",
+        nomorPesawat: "QG-851",
+        namaPesawat : "City Link",
         jenisPesawat: "ekonomi",
       },
       detailTerbang : {
@@ -165,15 +170,18 @@ const Search = () => {
             <div className="searchResultMenu">
               <ArrowBack onClick={() => window.history.back()} className="searchBtnBack"/>
               <div className="searchResultText">
-                <p>{pencarian.kotaAwal} &#62; {pencarian.kotaAkhir} </p> 
+                <p className='adaalah'>{pencarian.kotaAwal} &#62; {pencarian.kotaAkhir} </p> 
                 <span className='searchResultTextSub1'> &#160; - {pencarian.jumlahPenumpang} Penumpang - {pencarian.jenisPesawat}</span>
                 <span className='searchResultTextSub2'>{pencarian.jumlahPenumpang} Penumpang - {pencarian.jenisPesawat}</span>
               </div>
             </div>
-            <div className="searchBtnUbah">
-              <p>Ubah Pencarian</p>
+            <div className="searchBtnUbah" onClick={() => setUbahPencarianOpen(!ubahPencarianOpen)}>
+              <p className='adaalah'>Ubah Pencarian</p>
               <div className="searchBtnUbahBtn"><KeyboardArrowDown/></div>
-            </div>
+            </div>  
+              { ubahPencarianOpen && 
+                <SearchFlight className="searchBtnUbahModal"/>
+              }
           </div>
           <div className="searchResultDate">
             <Swiper
@@ -225,7 +233,7 @@ const Search = () => {
             </div>
             <div className="searchItemRight">
                 {
-                  items.length !== 0? items.map((e, i) => (
+                  items.length !== 0? items.slice(0, 3).map((e, i) => (
                                 <ResultItem key={i} data={e}/>
                                 ))
                                 :
@@ -235,6 +243,13 @@ const Search = () => {
                                   <p className="nullDataSubTitle">Coba cari perjalanan lainnya</p>
                                 </div>
                 }
+
+                {showMore && items.slice(3).map((e, i) => (
+                  <ResultItem key={i} data={e}/>
+                ))
+                }
+
+                <button onClick={() => setShowmore(true)}>More</button>
               
             </div>
           </div>
