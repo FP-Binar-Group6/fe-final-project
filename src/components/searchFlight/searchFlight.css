@@ -7,9 +7,12 @@
     background: var(--neutral-1);
     padding: 24px;
     width: 65vw;
-    /* margin: 0 auto; */
+/*     top: 8rem; */
+  
+    margin: 0 auto;
     top: 8rem;
-    /* margin-left: 5rem; */
+    margin-left: 5rem;
+  
     position: absolute;
     z-index: 10;
 }
@@ -324,14 +327,14 @@
 
 
 .search_button {
-    /* margin-top: 2rem; */
     width: 100%;
-    /* margin: 0 auto; */
     position: absolute;
-    bottom: -58px;
-    left: 0;
-    z-index: 11;
-    /* margin-left: 5rem; */
+/*     bottom: -58px; */
+/*     left: 0; */
+/*     z-index: 11; */
+    bottom: -12rem;
+    z-index: 1;
+    margin-left: 5rem;
 }
 
 .search_button button {
@@ -382,7 +385,7 @@
 .optionText {
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: 10px;
 }
 
 .optionLabel {
@@ -404,6 +407,7 @@
     font-size: 12px;
     line-height: 18px;
     margin: 0;
+    width: 8rem;
 }
 
 .option_counter {

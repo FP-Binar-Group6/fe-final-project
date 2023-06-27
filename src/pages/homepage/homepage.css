@@ -1,12 +1,16 @@
 
 
+
 .homepage__container {
     /* width: var(--container-width-lg); */
     width: 100%;
     margin: 0 auto;
-    padding-top: 13%;
-    color: var(--neutral-5);   
+  
+/*     padding-top: 13%; */
+/*     color: var(--neutral-5);    */
     
+    padding-top: 10%;
+    color: var(--neutral-5);   
 }
 
 
@@ -28,21 +32,30 @@
     width: 80vw;
     position: absolute;
     z-index: -1;
-    margin: auto;
-    bottom: 40px;
+  
+/*     margin: auto; */
+/*     bottom: 40px; */
+  
+    margin: 0 auto;
+  
 }
 
 .background__banner {
     display: flex;
     background-image: linear-gradient(to right, rgba(113, 38, 181, 0.5), var(--primary-purple-1));
     width: 100vw;
-    /* margin-top: 2rem; */
-    height: 100px;
-    z-index: -5;
+  
+/*     height: 100px; */
+/*     z-index: -5; */
 }
 
 .destinationCardWrapper{
-    display: flex;
+/*     display: flex; */
+  
+    margin-top: 2rem;
+    height: 100px;
+    z-index: -5;
+  
 }
 
 
