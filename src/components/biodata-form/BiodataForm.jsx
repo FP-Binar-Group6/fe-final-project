@@ -19,15 +19,13 @@ const BiodataForm = ({ isCheckout }) => {
 
   const [namaPenumpang, setNamaPenumpang] = useState("");
   const [lastNamePenumpang, setLastNamePenumpang] = useState("");
-//   const [teleponPenumpang, setTeleponPenumpang] = useState("");
-//   const [emailPenumpang, setEmailPenumpang] = useState("");
-
   const [lahir, setLahir] = useState("");
   const [kewarganegaraan, setKewarganegaraan] = useState("");
   const [paspor, setPaspor] = useState("");
   const [penerbit, setPenerbit] = useState("");
   const [berlaku, setBerlaku] = useState("");
-
+  const [teleponPenumpang, setTeleponPenumpang] = useState("");
+  const [emailPenumpang, setEmailPenumpang] = useState("");
 
   const onBooking = (e) => {
     e.preventDefault();
@@ -163,23 +161,6 @@ const BiodataForm = ({ isCheckout }) => {
                 />
               </div>
               <div className="list__input">
-                {/* <p>Nomor Telepon</p>
-               <input
-                  type="text"
-                  placeholder="Nomor Telepon"
-                  disabled={isCheckout ? true : false}
-                  value={teleponPenumpang}
-                  onChange={(e) => setTeleponPenumpang(e.target.value)}
-                />
-              </div>
-              <div className="list__input">
-                <p>Email</p>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  disabled={isCheckout ? true : false}
-                  value={emailPenumpang}
-                  onChange={(e) => setEmailPenumpang(e.target.value)} */}
                 <p>Tanggal Lahir</p>
                 <input
                   type="date"
