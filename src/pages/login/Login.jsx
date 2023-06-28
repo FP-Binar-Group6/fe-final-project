@@ -5,19 +5,41 @@ import { Link } from 'react-router-dom'
 import Register from '../register/Register'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-const Login = () => {
+import { login } from "../../redux/actions/auth"
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
+const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(false)
+
+  const onSubmit  = (e) => {
+    e.preventDefault();
+    const data = { email, password };
+    if (email==="") {
+      toast.error("Email is required")
+    } if (password===""){
+      toast.error("Password is required")
+      return
+    }
+
+    dispatch(login(data, navigate));
+    console.log (data)
+  };
 
   return (
     <div className='Login'>
       <img className='bg-login' src={auth}/>
       <div className='login-form'>
         <h2>Masuk</h2>
-        <form>
+        <form onSubmit={onSubmit}>
           <p>Email/No Telepon</p>
-          <input className='email-input' placeholder='contoh: johndoe@gmail.com' />
+          <input className='email-input' placeholder='contoh: johndoe@gmail.com' value={email} onChange={(e) => setEmail(e.target.value)}/>
           <label className='password'>
             <p>Password</p>
             <a href=''> lupa kata sandi?</a>

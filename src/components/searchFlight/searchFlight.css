@@ -11,7 +11,6 @@
   
     margin: 0 auto;
     top: 8rem;
-    margin-left: 5rem;
   
     position: absolute;
     z-index: 10;
@@ -83,8 +82,8 @@
 /* DESTINATION MODAL */
 .destination_options {
     position: absolute;
-    /* top: 70%; */
-    top: 50%;
+    top: 70%;
+    /* top: 50%; */
     left: 15%;
     background-color: var(--neutral-1);
     border-radius: 12px;
@@ -329,12 +328,12 @@
 .search_button {
     width: 100%;
     position: absolute;
-/*     bottom: -58px; */
-/*     left: 0; */
-/*     z-index: 11; */
-    bottom: -12rem;
-    z-index: 1;
-    margin-left: 5rem;
+    bottom: -58px;
+    left: 0;
+    z-index: 11;
+    /* bottom: -12rem; */
+    /* z-index: 1; */
+    /* margin-left: 5rem; */
 }
 
 .search_button button {
@@ -559,7 +558,7 @@
     .search_flight_container {
         width: 90vw;
         /* margin: 0 auto; */
-        top: 6rem;
+        /* top: 6rem; */
         /* margin-left: 5rem; */
     }
 

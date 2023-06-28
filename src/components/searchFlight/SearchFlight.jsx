@@ -16,9 +16,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangeCalendar } from "@mui/x-date-pickers-pro/DateRangeCalendar";
-// Link Sementara
-// import { Link } from "react-router-dom";
-// import { FlightLand } from "@mui/icons-material";
 
 import { format } from "date-fns";
 import { Calendar } from "react-date-range";
@@ -27,6 +24,8 @@ import 'react-date-range/dist/theme/default.css'
 import { useDispatch, useSelector } from "react-redux";
 
 import { getPostAirport } from "../../redux/actions/post";
+import { FlightLand } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const SearchFlight = () => {
   const [showSwitch, setshowSwitch] = useState(false);
@@ -50,22 +49,6 @@ const SearchFlight = () => {
     children: 0,
     baby: 0,
   });
-
-  const city = [
-    {
-      cityName : "Jakarta"
-    },
-    {
-      cityName : "Bandung"
-    },
-    {
-      cityName : "Bali"
-    },
-    {
-      cityName : "Malang"
-    },
-
-  ]
 
   const handleOption = (name, operation) => {
     setPassenger((prev) => {
@@ -132,19 +115,20 @@ const SearchFlight = () => {
                   <p>Pencarian Terkini</p>
                   <span>Hapus</span>
                 </div>
-//                   { city.map((e, i) => (
-//                     <div className="latestSeachItem"> 
-//                       <label key={i}>{e.cityName}</label>
-//                       <CloseIcon style={{ color: "#8A8A8A" }} />
-//                     </div>
-//                   ))
-//                   }
-                {getPostAirport.cityName.filter((airport)=>airport.cityName === filterNameFrom) &&
+                {posts?.length > 0 &&
+                  posts.map((post) => (
+                <div className="latestSeachItem" onClick={(e)=>setDestinationItem("Jakarta")}>
+                  <label>{post?.cityName}</label>
+                  <CloseIcon style={{ color: "#8A8A8A" }} />
+                </div>
+                  ))
+                }
+                {/* {getPostAirport.cityName.filter((airport)=>airport.cityName === filterNameFrom) &&
                   <div className="latestSeachItem" onClick={(e)=>setDestinationItem("Jakarta")}>
                   <label>Jakarta</label>
                   <CloseIcon style={{ color: "#8A8A8A" }} />
                 </div>
-                }
+                } */}
                 <hr />
               </div>
               
@@ -177,13 +161,6 @@ const SearchFlight = () => {
                   <p>Pencarian Terkini</p>
                   <span>Hapus</span>
                 </div>
-//                   { city.map((e, i) => (
-//                     <div className="latestSeachItem">
-//                       <label key={i}>{e.cityName}</label>
-//                       <CloseIcon style={{ color: "#8A8A8A" }} />
-//                     </div>
-//                   ))
-//                   }
                 <div className="latestSeachItem" onClick={(e)=>setDestinationItemTo("Jakarta")}>
                   <label>Jakarta</label>
                   <CloseIcon style={{ color: "#8A8A8A" }} />
@@ -242,9 +219,9 @@ const SearchFlight = () => {
 
           </div>
 
-            <div class="form-check form-switch">
+            <div className="form-check form-switch">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 role="switch"
                 id="flexSwitchCheckDefault"
