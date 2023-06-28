@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import "./destinationCards.css"
+import React, { useState } from "react";
+import "./destinationCards.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 // import imageDestination1 from "../../pages/homepage/asset/destination_card_option.png";
@@ -9,7 +9,7 @@ import destinasiFav from "../../assets/images/destinasiFav.png"
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-
+import imageDestination1 from "../../assets/homepage-image/destination_card_option.png";
 import { Autoplay } from "swiper";
 
 const types = ['Semua', 'Asia', 'Amerika', 'Australia', 'Eropa', 'Afrika'];
@@ -64,13 +64,16 @@ const destinationItem = [
   },
 ]
 
+
+
+
 const DestinationCards = () => {
   const [active, setActive] = useState(types[0]);
   return (
     <div className="destination_favorite">
-        <h6>Destinasi Favorit</h6>
-        <div className="destination_category">
-          {types.map(type => (
+         <h6>Destinasi Favorit</h6>
+         <div className="destination_category">
+           {types.map(type => (
             <div className='destination_category_option' key={type} active={active === type} onClick={()=>setActive(type)}>
               <SearchIcon />{type}
             </div>
@@ -78,23 +81,6 @@ const DestinationCards = () => {
         </div>
 
         <div className="destination_cards">
-          {/* {destinationItem.map((e, i) => (
-            <div className="destination_card_option" key={i}>
-              <img src={imageDestination1} alt='' />
-              <span className="offer">{e.offer}</span>
-              <div id="detail_card">
-                <p id="flight">
-                  {e.from} <ArrowRightAltIcon /> {e.to}{" "}
-                </p>
-                <p id="plane">{e.plane}</p>
-                <p id="schedule">{e.schedule}</p>
-                <p id="price">
-                  Mulai dari <span>IDR {e.price}</span>{" "}
-                </p>
-              </div>
-            </div>
-          ))
-          } */}
           <Swiper
             breakpoints={{
               320 :{
@@ -130,9 +116,95 @@ const DestinationCards = () => {
           }
 
         </Swiper>
-        </div>
+      {/* <h6>Destinasi Favorit</h6>
+      <div className="destination_category">
+        {types.map((type) => (
+          <div
+            className="destination_category_option"
+            key={type}
+            active={active === type}
+            onClick={() => setActive(type)}
+          >
+            <SearchIcon />
+            {type}
+          </div>
+        ))}
       </div>
-  )
-}
 
-export default DestinationCards
+      <div className="destination_cards">
+        <div className="destination_card_option">
+          <img src={imageDestination1} alt="" />
+          <span className="offer">Limited</span>
+          <div id="detail_card">
+            <p id="flight">
+              Jakarta <ArrowRightAltIcon /> Bangkok{" "}
+            </p>
+            <p id="plane">AirAsia</p>
+            <p id="schedule">20-30 Maret 2023</p>
+            <p id="price">
+              Mulai dari <span>IDR 950.000</span>{" "}
+            </p>
+          </div>
+        </div>
+        <div className="destination_card_option">
+          <img src={imageDestination1} alt="" />
+          <span className="offer">Limited</span>
+          <div id="detail_card">
+            <p id="flight">
+              Jakarta <ArrowRightAltIcon /> Bangkok{" "}
+            </p>
+            <p id="plane">AirAsia</p>
+            <p id="schedule">20-30 Maret 2023</p>
+            <p id="price">
+              Mulai dari <span>IDR 950.000</span>{" "}
+            </p>
+          </div>
+        </div>
+        <div className="destination_card_option">
+          <img src={imageDestination1} alt="" />
+          <span className="offer">Limited</span>
+          <div id="detail_card">
+            <p id="flight">
+              Jakarta <ArrowRightAltIcon /> Bangkok{" "}
+            </p>
+            <p id="plane">AirAsia</p>
+            <p id="schedule">20-30 Maret 2023</p>
+            <p id="price">
+              Mulai dari <span>IDR 950.000</span>{" "}
+            </p>
+          </div>
+        </div>
+        <div className="destination_card_option">
+          <img src={imageDestination1} alt="" />
+          <span className="offer">Limited</span>
+          <div id="detail_card">
+            <p id="flight">
+              Jakarta <ArrowRightAltIcon /> Bangkok{" "}
+            </p>
+            <p id="plane">AirAsia</p>
+            <p id="schedule">20-30 Maret 2023</p>
+            <p id="price">
+              Mulai dari <span>IDR 950.000</span>{" "}
+            </p>
+          </div>
+        </div>
+        <div className="destination_card_option">
+          <img src={imageDestination1} alt="" />
+          <span className="offer">Limited</span>
+          <div id="detail_card">
+            <p id="flight">
+              Jakarta <ArrowRightAltIcon /> Bangkok{" "}
+            </p>
+            <p id="plane">AirAsia</p>
+            <p id="schedule">20-30 Maret 2023</p>
+            <p id="price">
+              Mulai dari <span>IDR 950.000</span>{" "}
+            </p>
+          </div>
+        </div>*/}
+      </div> 
+    </div>
+  );
+};
+
+export default DestinationCards;
