@@ -27,9 +27,7 @@ const Login = () => {
       toast.error("Password is required")
       return
     }
-
     dispatch(login(data, navigate));
-    console.log (data)
   };
 
   return (
@@ -38,11 +36,11 @@ const Login = () => {
       <div className='login-form'>
         <h2>Masuk</h2>
         <form onSubmit={onSubmit}>
-          <p>Email/No Telepon</p>
+          <p>Email</p>
           <input className='email-input' placeholder='contoh: johndoe@gmail.com' value={email} onChange={(e) => setEmail(e.target.value)}/>
           <label className='password'>
             <p>Password</p>
-            <a href=''> lupa kata sandi?</a>
+            <a href={'resetpassword'}> lupa kata sandi?</a>
           </label>
           <div className='password-input' >
             <input

@@ -12,13 +12,14 @@ export const login = (data, navigate) => async (dispatch) => {
       { "Content-Type": "application/json" } 
     );
 
-    const { token } = response?.data; 
+    const token = response?.data?.token;
 
     dispatch(setToken(token));
     dispatch(setIsLoggedIn(true));
-    console.log(token)
+
     toast.success("Log in succes");
     navigate("/");
+    
   } catch (error) {
     if (axios.isAxiosError(error)) {
       toast.error(error?.response?.data?.message|| error?.message);
@@ -36,7 +37,7 @@ export const register = (data, navigate) => async (dispatch) => {
       { "Content-Type": "application/json" }
     );  
 
-    const { token } = response?.data;
+    const token = response?.data?.token;
 
     dispatch(setToken(token));
     dispatch(setIsLoggedIn(true));

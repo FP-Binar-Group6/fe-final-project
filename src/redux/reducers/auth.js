@@ -17,7 +17,7 @@ const authSlicer = createSlice({
         localStorage.removeItem("token");
       }
       state.token = action.payload;
-    },
+    },  
     setIsLoggedIn: (state, action) => {
       state.isLoggedIn = action.payload;
     },
