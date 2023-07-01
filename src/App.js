@@ -184,7 +184,14 @@ function App() {
               </Protected>
             }
           />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <Protected>
+                <Profile />
+              </Protected>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </Provider>
