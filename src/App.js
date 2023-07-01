@@ -154,17 +154,36 @@ function App() {
           <Route path="/resetpassword" element={<ForgotPassword />} />
 
           <Route path="/" element={<Homepage />} />
-          <Route path="/search" element={<Protected><Search /></Protected>} />
-          <Route path="/booking" element={
-          <Protected>
-            <Booking />
-          </Protected>
-            } />
+          <Route path="/search" element={<Search />} />
+          <Route
+            path="/booking"
+            element={
+              <Protected>
+                <Booking />
+              </Protected>
+            }
+          />
+
           <Route path="/booking/checkout" element={<Booking />} />
           <Route path="/booking/payment" element={<Booking />} />
           <Route path="/booking/success" element={<Booking />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/notifikasi" element={<Notifikasi />} />
+          <Route
+            path="/history"
+            element={
+              <Protected>
+                <History />
+              </Protected>
+            }
+          />
+
+          <Route
+            path="/notifikasi"
+            element={
+              <Protected>
+                <Notifikasi />
+              </Protected>
+            }
+          />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
