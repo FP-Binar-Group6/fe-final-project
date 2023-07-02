@@ -8,8 +8,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Ellipse from "../../assets/Ellipse.png";
 import "./notifikasi.css";
 import EllipseDanger from "../../assets/EllipseDanger.png";
+import { useNavigate } from "react-router-dom";
 
 function Notifikasi() {
+  const navigate = useNavigate();
   const [smShow, setSmShow] = useState(false);
   const [datepicker, setDatepicker] = useState(false);
   const [query, setQuery] = useState("");
@@ -22,13 +24,14 @@ function Notifikasi() {
         style={{ boxShadow: "0px 2px rgb(206, 204, 204)" }}
       >
         <Row className="d-flex justify-content-center">
-          <Col className="me-5" xs={8}>
+          <Col className="mt-5 me-5" xs={8}>
             <h5>Notifikasi</h5>
           </Col>
         </Row>
         <Row className="d-flex align-items-center justify-content-center mt-3">
           <Col xs={6} className="pb-2">
             <div
+              onClick={() => navigate("/")}
               className="d-flex align-items-center  p-2 ps-3"
               style={{
                 background: "#A06ECE",
@@ -140,7 +143,7 @@ function Notifikasi() {
                       borderRadius: "8px 0 0 8px",
                     }}
                     type="text"
-                    placeholder="Masukan Nomor Penerbangan"
+                    placeholder="Pencarian Notifikasi"
                     onChange={(e) => {
                       setQuery(e.target.value);
                     }}

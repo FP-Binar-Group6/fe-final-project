@@ -18,8 +18,10 @@ import logo from "../../assets/logo.png";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import DatePickerRanger from "../../components/datepicker/DatePickerRange";
+import { useNavigate } from "react-router-dom";
 
 const History = () => {
+  const navigate = useNavigate();
   const [smShow, setSmShow] = useState(false);
   const [datepicker, setDatepicker] = useState(false);
   const [query, setQuery] = useState("");
@@ -33,18 +35,19 @@ const History = () => {
       {/* Header */}
       <Container
         fluid
-        className="history my-2 pb-3 "
+        className="notifikasi my-5 pb-3 "
         style={{ boxShadow: "0px 2px rgb(206, 204, 204)" }}
       >
         <Row className="d-flex justify-content-center">
-          <Col className="me-5" xs={8}>
-            <h5>Riwayat Pemesanan</h5>
+          <Col className="mt-5 me-5" xs={8}>
+            <h5>Beranda</h5>
           </Col>
         </Row>
         <Row className="d-flex align-items-center justify-content-center me-3 mt-3">
           <Col xs={6} className="pb-2">
             <div
-              className="d-flex align-items-center  p-2 ps-3"
+              onClick={() => navigate("/")}
+              className="d-flex align-items-center  p-2 ps-2"
               style={{
                 background: "#A06ECE",
                 color: "white",
@@ -210,9 +213,9 @@ const History = () => {
             <Row>
               <p style={{ fontWeight: "700" }}>Maret 2023</p>
 
-              <Col md={6}>
+              <Col sm={6}>
                 <Row>
-                  <Col md={6} className="mb-4">
+                  <Col sm={6} className="mb-4">
                     <Card className="Isi1" style={{ width: "23rem" }}>
                       <div className="d-flex justify-content-start">
                         {success ? (
@@ -275,7 +278,7 @@ const History = () => {
                   </Col>
                 </Row>
                 <Row>
-                  <Col md={6} className="mb-4">
+                  <Col sm={6} className="mb-4">
                     <Card className="Isi1" style={{ width: "23rem" }}>
                       <div className="d-flex justify-content-start">
                         {unpaid ? (
@@ -338,7 +341,7 @@ const History = () => {
                   </Col>
                 </Row>
               </Col>
-              <Col md={6} style={{ width: "23rem" }}>
+              <Col sm={6} style={{ width: "23rem" }}>
                 <div>
                   <div
                     className="m-2 pb-1"
@@ -454,6 +457,7 @@ const History = () => {
                     ) : (
                       <div>
                         <Button
+                          onClick={() => navigate("/booking/payment")}
                           variant="danger"
                           style={{
                             padding: "0.5rem",
@@ -524,6 +528,7 @@ const History = () => {
                     Anda belum melakukan pemesanan penerbangan
                   </p>
                   <Button
+                    onClick={() => navigate("/")}
                     variant="transparant"
                     style={{ background: "#A06ECE", color: "white" }}
                   >
