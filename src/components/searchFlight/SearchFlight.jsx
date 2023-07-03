@@ -23,7 +23,7 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { useDispatch, useSelector } from "react-redux";
 
-import { getPostAirport } from "../../redux/actions/post";
+import { getAllAirport, getPostAirport } from "../../redux/actions/home";
 import { FlightLand } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
@@ -37,11 +37,46 @@ const SearchFlight = () => {
   const [openDateReturn, setopenDateReturn] = useState(false);
   const [calenderDeparture, setCalenderDeparture] = useState("");
   const [calenderReturn, setCalenderReturn] = useState("");
-
   const [filterNameTo, setFilterNameTo] = useState("");
   const [filterNameFrom, setFilterNameFrom] = useState("");
   const [destinationItem, setDestinationItem] = useState("")
-  const [destinationItemTo, setDestinationItemTo] = useState("")
+  
+  const airport = useSelector((state)=>state.home.airport);
+  const [kotakeberangkatan, setKotakeberangkatan] = useState("Jakarta");
+  const [destinationItemTo, setDestinationItemTo] = useState("Surabaya");
+  const data = [{
+    "airportId": 1,
+    "name": "Soekarno-Hatta International Airport",
+    "code": "CGK",
+    "cityName": "Jakarta"
+},
+{
+    "airportId": 2,
+    "name": "Ngurah Rai International Airport",
+    "code": "DPS",
+    "cityName": "Denpasar"
+},
+{
+    "airportId": 3,
+    "name": "Juanda International Airport",
+    "code": "SUB",
+    "cityName": "Surabaya"
+},
+{
+    "airportId": 4,
+    "name": "Husein Sastranegara International Airport",
+    "code": "BDO",
+    "cityName": "Bandung"
+},]
+
+  console.log("airport", airport)
+  console.log("data", data)
+  
+  useEffect(() => {
+
+    
+  dispatch(getAllAirport())
+  }, []);
 
   const [seatClass, setSeatClass] = useState("");
   const [passenger, setPassenger] = useState({
@@ -78,13 +113,6 @@ const SearchFlight = () => {
   // dispatch -> to change the global state in redux
   const dispatch = useDispatch();
 
-  // useSelector -> to access the global state (redux)
-  const { posts } = useSelector((state) => state.post);
-
-  useEffect(() => {
-    dispatch(getPostAirport());
-  }, [dispatch]);
-
   return (
     <>
       <div className="search_flight_container">
@@ -100,7 +128,7 @@ const SearchFlight = () => {
               className="destination__from__to_input"
               onClick={() => setopenDestinationFrom(!openDestinationFrom)}
             >
-               {destinationItem} 
+               {kotakeberangkatan}
             </span>
             {openDestinationFrom && (
               <div className="destination_options">
@@ -115,14 +143,29 @@ const SearchFlight = () => {
                   <p>Pencarian Terkini</p>
                   <span>Hapus</span>
                 </div>
-                {posts?.length > 0 &&
+
+                {
+                  airport.map((kota)=>{
+                    
+                    return(
+                      <>
+                      <div onClick ={()=>setKotakeberangkatan(kota.cityName)} className="latestSeachItem">
+                      <label>{kota.cityName}</label>
+                      <CloseIcon style={{ color: "#8A8A8A" }} />
+                    </div>
+                    <hr />
+                      </>
+                  )
+                  })
+                }
+                {/* {posts?.length > 0 &&
                   posts.map((post) => (
                 <div className="latestSeachItem" onClick={(e)=>setDestinationItem("Jakarta")}>
                   <label>{post?.cityName}</label>
                   <CloseIcon style={{ color: "#8A8A8A" }} />
                 </div>
                   ))
-                }
+                } */}
                 {/* {getPostAirport.cityName.filter((airport)=>airport.cityName === filterNameFrom) &&
                   <div className="latestSeachItem" onClick={(e)=>setDestinationItem("Jakarta")}>
                   <label>Jakarta</label>
@@ -161,6 +204,21 @@ const SearchFlight = () => {
                   <p>Pencarian Terkini</p>
                   <span>Hapus</span>
                 </div>
+
+                {
+                  airport.map((kota)=>{
+                    
+                    return(
+                      <>
+                      <div onClick ={()=>setDestinationItemTo(kota.cityName)} className="latestSeachItem">
+                      <label>{kota.cityName}</label>
+                      <CloseIcon style={{ color: "#8A8A8A" }} />
+                    </div>
+                    <hr />
+                      </>
+                  )
+                  })
+                }
                 <div className="latestSeachItem" onClick={(e)=>setDestinationItemTo("Jakarta")}>
                   <label>Jakarta</label>
                   <CloseIcon style={{ color: "#8A8A8A" }} />
