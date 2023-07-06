@@ -268,6 +268,13 @@ const History = () => {
                                       .departureAirport.cityName
                                   }
                                 </p>
+                                <p style={{ width: "5rem" }}>
+                                  {" "}
+                                  {
+                                    history.tickets[0].seat.schedule
+                                      .departureTime
+                                  }
+                                </p>
                               </div>
                               <div className="text-center">
                                 <ArrowRightAltIcon sx={{ fontSize: 40 }} />
@@ -281,6 +288,10 @@ const History = () => {
                                     history.tickets[0].seat.schedule
                                       .arrivalAirport.cityName
                                   }
+                                </p>
+                                <p style={{ width: "5rem" }}>
+                                  {" "}
+                                  {history.tickets[0].seat.schedule.arrivalTime}
                                 </p>
                               </div>
                             </div>
@@ -496,8 +507,11 @@ const History = () => {
                                   )}
                                 </div>
                                 <div className="Isi2">
-                                  <div className="text-center">
-                                    <p style={{ fontWeight: "700" }}>
+                                  <div>
+                                    <p
+                                      className="text-center"
+                                      style={{ fontWeight: "700" }}
+                                    >
                                       <LocationOnIcon
                                         style={{ color: "#8A8A8A" }}
                                       />
@@ -506,18 +520,36 @@ const History = () => {
                                           .departureAirport.cityName
                                       }
                                     </p>
+                                    <p style={{ width: "4rem" }}>
+                                      {" "}
+                                      {
+                                        history.tickets[0].seat.schedule
+                                          .departureTime
+                                      }
+                                    </p>
                                   </div>
-                                  <div className="text-center mt-3">
+                                  <div className="text-center mt-5">
                                     <ArrowRightAltIcon sx={{ fontSize: 30 }} />
                                   </div>
-                                  <div className="text-center">
-                                    <p style={{ fontWeight: "700" }}>
+                                  <div>
+                                    <p
+                                      className="text-center"
+                                      style={{ fontWeight: "700" }}
+                                    >
                                       <LocationOnIcon
                                         style={{ color: "#8A8A8A" }}
                                       />
                                       {
                                         history.tickets[0].seat.schedule
                                           .arrivalAirport.cityName
+                                      }
+                                    </p>
+
+                                    <p style={{ width: "4rem" }}>
+                                      {" "}
+                                      {
+                                        history.tickets[0].seat.schedule
+                                          .arrivalTime
                                       }
                                     </p>
                                   </div>
