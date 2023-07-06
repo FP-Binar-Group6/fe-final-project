@@ -16,7 +16,6 @@ const Profile = () => {
     const [changePhoneNumber, setChangePhoneNumber] = useState("")
 
     useEffect(() => {
-        const updateProfile = { changeName, changeEmail, changePhoneNumber }
         dispatch(getProfile())
     }, []);
 
@@ -39,7 +38,6 @@ const Profile = () => {
         }
 
         dispatch(updateProfile(
-            
             {
                 userId: user.find((e) => e.email === changeEmail).userId,
                 name: changeName,
