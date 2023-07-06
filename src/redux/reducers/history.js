@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  history: [],
+  historys: [],
   historyDetails: null,
 };
 
@@ -10,7 +10,7 @@ const historySlicer = createSlice({
   initialState,
   reducers: {
     setHistory: (state, action) => {
-      state.history = action.payload;
+      state.historys = action.payload;
     },
     setHistoryDetails: (state, action) => {
       state.historyDetails = action.payload;

@@ -1,21 +1,25 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { setHistoryDetails, setHistory } from "../reducers/history";
+import { setHistory } from "../reducers/history";
 
 const baseUrl = process.env.REACT_APP_AUTH_AirTicket;
 
 export const getHistory = () => async (dispatch, getState) => {
   try {
     const { token } = getState().auth;
-    const response = await axios.get(`${baseUrl}/`, {
+    console.log(token);
+    const response = await axios.get(`${baseUrl}/api/payment/history/17`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    dispatch(setHistory(response.data.results));
+
+    const data = response?.data;
+    console.log(data);
+    dispatch(setHistory(data));
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message || error?.message);
       return;
     }
     toast.error(error?.message);
@@ -25,22 +29,4 @@ export const getHistory = () => async (dispatch, getState) => {
 export const searchHistory = async (q) => {
   const search = await axios.get(`${baseUrl}/`);
   return search.data;
-};
-
-export const getHistoryDetails = (id) => async (dispatch, getState) => {
-  try {
-    const { token } = getState().auth;
-    const response = await axios.get(`${baseUrl}/`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    dispatch(setHistoryDetails(response.data));
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      toast.error(error?.response?.data?.message);
-      return;
-    }
-    toast.error(error?.message);
-  }
 };
