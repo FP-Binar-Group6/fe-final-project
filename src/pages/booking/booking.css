@@ -12,10 +12,9 @@
 
 .booking__header {
     display: flex;
-    align-items: center;
 }
 
-.booking__notif {
+/* .booking__notif {
     margin: 0.8rem 1rem 1rem;
     border-radius: 12px;
     text-align: center;
@@ -27,7 +26,7 @@
 
 .booking__notif p {
     padding: 0.5rem;
-}
+} */
 
 .booking__biodata {
     display: grid;
@@ -82,7 +81,7 @@
 
 .booking__code__judul {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     gap: 0.25rem;
 }
 

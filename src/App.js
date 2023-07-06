@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Outlet, Route, RouterProvider, Routes, createBrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import Homepage from "./pages/homepage/Homepage";
@@ -13,8 +13,9 @@ import Notifikasi from "./pages/notifikasi/Notifikasi";
 import Profile from "./pages/profile/Profile";
 
 import { Provider } from "react-redux";
-import "react-toastify/dist/ReactToastify.css";
 import store from "./redux/store";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 
@@ -107,13 +108,15 @@ function App() {
     <Provider store={store}>
     <BrowserRouter>
       <Navbar />
+      <ToastContainer theme="colored"/>
       <Routes>
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
         
         <Route path='/' element={<Homepage/>} />
         <Route path='/search' element={<Search/>} />
-        <Route path='/booking' element={<Booking/>} />
+        <Route path='/booking/pemesan' element={<Booking/>} />
+        <Route path='/booking/penumpang' element={<Booking/>} />
         <Route path='/booking/checkout' element={<Booking/>} />
         <Route path='/booking/payment' element={<Booking/>} />
         <Route path='/booking/success' element={<Booking/>} />
