@@ -4,6 +4,8 @@ import { setHistory } from "../reducers/history";
 
 const baseUrl = process.env.REACT_APP_AUTH_AirTicket;
 
+//https://be-airticket-a6bnbhk5xa-as.a.run.app/api/payment/history/{userId}
+
 export const getHistory = () => async (dispatch, getState) => {
   try {
     const { token } = getState().auth;
@@ -14,7 +16,7 @@ export const getHistory = () => async (dispatch, getState) => {
       },
     });
 
-    const data = response?.data;
+    const { data } = response?.data;
     console.log(data);
     dispatch(setHistory(data));
   } catch (error) {

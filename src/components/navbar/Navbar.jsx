@@ -1,18 +1,29 @@
 import "./navbar.css";
 
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../../assets/logo.png";
 import LoginIcon from "@mui/icons-material/Login";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { Link, useNavigate } from "react-router-dom";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import { useDispatch, useSelector } from "react-redux";
+import { getNotif } from "../../redux/actions/notif";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const isLoggedIn = true;
+  const dispatch = useDispatch();
 
   const pointer = { cursor: "pointer" };
+  const { notifs } = useSelector((state) => state.notif);
+
+  useEffect(() => {
+    dispatch(getNotif());
+  }, [dispatch]);
+  console.log(notifs);
+
   return (
     <div className="navbarr">
       {isLoggedIn ? (
@@ -26,11 +37,20 @@ const Navbar = () => {
               style={pointer}
               onClick={() => navigate("/history")}
             />
-            <NotificationsNoneIcon
-              sx={{ fontSize: 24 }}
-              style={pointer}
-              onClick={() => navigate("/notifikasi")}
-            />
+            {notifs.length > 0 ? (
+              <NotificationsActiveIcon
+                sx={{ fontSize: 24 }}
+                style={{ color: "red", cursor: "pointer" }}
+                onClick={() => navigate("/notifikasi")}
+              />
+            ) : (
+              <NotificationsNoneIcon
+                sx={{ fontSize: 24 }}
+                style={pointer}
+                onClick={() => navigate("/notifikasi")}
+              />
+            )}
+
             <PersonOutlineOutlinedIcon
               sx={{ fontSize: 24 }}
               style={pointer}

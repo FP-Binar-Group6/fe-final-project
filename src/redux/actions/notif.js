@@ -4,18 +4,24 @@ import { setNotif } from "../reducers/notif";
 
 const baseUrl = process.env.REACT_APP_AUTH_AirTicke;
 
+//https://be-airticket-a6bnbhk5xa-as.a.run.app/api/notifications/{userId}
+
 export const getNotif = () => async (dispatch, getState) => {
   try {
     const { token } = getState().auth;
-    const response = await axios.get(`${baseUrl}/`, {
+    console.log(token);
+    const response = await axios.get(`${baseUrl}/api/notifications/5`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    dispatch(setNotif(response.data.results));
+    const { data } = response?.data;
+    console.log(data);
+    dispatch(setNotif(data));
   } catch (error) {
+    console.log("untuk munculin error", error);
     if (axios.isAxiosError(error)) {
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message || error?.message);
       return;
     }
     toast.error(error?.message);

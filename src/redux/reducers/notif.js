@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  notif: [],
+  notifs: [],
 };
 
 const notifSlicer = createSlice({
@@ -9,7 +9,7 @@ const notifSlicer = createSlice({
   initialState,
   reducers: {
     setNotif: (state, action) => {
-      state.notif = action.payload;
+      state.notifs = action.payload;
     },
   },
 });
