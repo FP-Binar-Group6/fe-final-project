@@ -252,7 +252,7 @@ function Notifikasi() {
                           className="ms-3 text-justify"
                           style={{ fontWeight: "500" }}
                         >
-                          {notif.createdAt}
+                          {notif.createdAt} {/* Data api belum data */}
                         </p>
                       </div>
                       <div className="ms-4">
