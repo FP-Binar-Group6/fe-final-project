@@ -4,23 +4,21 @@ import { toast } from "react-toastify";
 
 export const login = (data, navigate) => async (dispatch) => {
   try {
+    
     const response = await axios.post(
       `${process.env.REACT_APP_AUTH_AirTicket}/api/auth/login`,
       data,
       { "Content-Type": "application/json" } 
     );
 
-    const {token, userId}  = response?.data
-
+    const token = response?.data?.token;
     dispatch(setToken(token));
     dispatch(setUserId(userId));
     dispatch(setIsLoggedIn(true));
 
-    
-    console.log("munculin token",token)
-    
     toast.success("Log in succes");
     navigate("/");
+    
   } catch (error) {
     if (axios.isAxiosError(error)) {
       toast.error(error?.response?.data?.message|| error?.message);
@@ -37,8 +35,7 @@ export const register = (data, navigate) => async (dispatch) => {
       data,
       { "Content-Type": "application/json" }
     );  
-
-    const { token, userId } = response?.data;
+    const token = response?.data?.token;
 
     dispatch(setToken(token));
     dispatch(setUserId(userId));

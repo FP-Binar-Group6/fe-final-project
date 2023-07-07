@@ -6,7 +6,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import LogoutIcon from "@mui/icons-material/Logout";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProfile, logout } from "../../redux/actions/auth";
@@ -14,10 +14,12 @@ import { getProfile, logout } from "../../redux/actions/auth";
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const isLoggedIn = true;
+  
 
   const pointer = { cursor: "pointer" };
 
-  const { isLoggedIn, token } = useSelector((state) => state.auth);
+  const { isLoggedIn, token, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (isLoggedIn && token) {
@@ -48,7 +50,7 @@ const Navbar = () => {
               style={pointer}
               onClick={() => navigate("/profile")}
             />
-            <LogoutIcon
+               <LogoutIcon
               sx={{ fontSize: 24 }}
               style={pointer}
               onClick={() => dispatch(logout(navigate))}
@@ -67,6 +69,6 @@ const Navbar = () => {
       )}
     </div>
   );
-};
+};  
 
 export default Navbar;
