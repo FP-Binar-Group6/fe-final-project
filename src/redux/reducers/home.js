@@ -13,6 +13,7 @@ const homeSlicer = createSlice({
     setAirport: (state, action) => {
       state.airport = action.payload;
     },
+
     setClass: (state, action) => {
       state.class = action.payload;
     },
@@ -23,5 +24,6 @@ const homeSlicer = createSlice({
 });
 
 export const { setDestinationFav, setClass, setAirport } = homeSlicer.actions;
+
 
 export default homeSlicer.reducer;

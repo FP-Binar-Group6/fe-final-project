@@ -34,11 +34,11 @@ export const getAllClass = (navigate) => async (dispatch, getState) => {
     dispatch(setClass(data));
   } catch (error) {
     console.log("untuk munculin error", error);
+
     if (axios.isAxiosError(error)) {
       toast.error(error?.response?.data?.message);
       return;
     }
-
     toast.error(error.message);
   }
 };

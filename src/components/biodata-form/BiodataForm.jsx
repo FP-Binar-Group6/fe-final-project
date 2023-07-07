@@ -76,7 +76,7 @@ const BiodataForm = () => {
         birthDate,
         nationality,
         idCardNumber,
-        scheduleId: 1,
+        scheduleId: 2,
       };
       dispatch(setDataPenumpang([...dataPenumpang, data]));
       toast.success(`Data Penumpang ${index + 1} berhasil tersimpan!`);
@@ -99,7 +99,7 @@ const BiodataForm = () => {
   };
 
   //data dummy penumpang
-  const user = ["Dewasa", "Dewasa"];
+  const user = ["Dewasa", "Anak"];
 
   return (
     <>

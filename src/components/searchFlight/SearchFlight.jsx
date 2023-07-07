@@ -40,11 +40,11 @@ const SearchFlight = () => {
   const [openDateReturn, setopenDateReturn] = useState(false);
   const [calenderDeparture, setCalenderDeparture] = useState("");
   const [calenderReturn, setCalenderReturn] = useState("");
-
   const [filterNameTo, setFilterNameTo] = useState("");
   const [filterNameFrom, setFilterNameFrom] = useState("");
   const [destinationFrom, setDestinationFrom] = useState("");
   const [destinationTo, setDestinationTo] = useState("");
+
 
   const [seatClass, setSeatClass] = useState("");
   const [passenger, setPassenger] = useState({
@@ -116,7 +116,6 @@ const SearchFlight = () => {
     // className,
     // navigate,
   ]);
-
   const handleOption = (name, operation) => {
     setPassenger((prev) => {
       return {

@@ -1,12 +1,21 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import auth from "./auth";
+
 import home from "./home";
-import search from "./search";
-import booking from "./booking";
+import auth from "./auth";
+  import search from "./search";
+import history from "./history";
+import notif from "./notif";
+import booking from "./booking"
+import user from "./user"
 
 export default combineReducers({
-  auth,
   home,
+  auth,
   search,
   booking,
+  user,
+  history,
+  notif,
+  post,
 });
+

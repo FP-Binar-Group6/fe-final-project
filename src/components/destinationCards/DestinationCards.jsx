@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { getSearchSchedule } from "../../redux/actions/search";
 
 const types = ["Semua", "Asia", "Amerika", "Australia", "Eropa", "Afrika"];
+
 // const destinationItem = [
 //   {
 //     offer: "limited",
@@ -122,6 +123,7 @@ const DestinationCards = () => {
   }, [dispatch]);
 
   console.log(destinasiFavorite);
+
 
   const [active, setActive] = useState(types[0]);
   return (
