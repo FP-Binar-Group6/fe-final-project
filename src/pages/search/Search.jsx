@@ -27,139 +27,6 @@ const Search = () => {
   const [slice, setSlice] = useState(0);
   const [sliceNext, setSliceNext] = useState(3);
 
-  const pencarian = {
-    kotaAwal: "jakarta",
-    kotaAkhir: "surabaya",
-    jumlahPenumpang: 1,
-    jenisPesawat: "Ekonomi",
-  };
-
-  const calendar = [
-    {
-      display: "Senin",
-      date: "02/03/2002",
-    },
-    {
-      display: "Selasa",
-      date: "02/03/2002",
-    },
-    {
-      display: "Rabu",
-      date: "02/03/2002",
-    },
-    {
-      display: "Kamis",
-      date: "02/03/2002",
-    },
-    {
-      display: "Jumat",
-      date: "02/03/2002",
-    },
-    {
-      display: "Sabtu",
-      date: "02/03/2002",
-    },
-    {
-      display: "Minggu",
-      date: "02/03/2002",
-    },
-    {
-      display: "Senin",
-      date: "02/03/2002",
-    },
-  ];
-
-  const items = [
-    {
-      detailPesawat: {
-        nomorPesawat: "GA-851",
-        namaPesawat: "Garuda",
-        jenisPesawat: "ekonomi",
-      },
-      detailTerbang: {
-        jamDeparture: "09:30",
-        tanggalDeparture: "19 Februari 2023",
-        bandaraDeparture: "CGK",
-        jamArrival: "15:15",
-        tanggalArrival: "19 Februari 2023",
-        bandaraArrival: "HKG",
-        durasi: "5h 45m",
-        transit: "direct",
-      },
-      detailLainnya: {
-        jumlahBagasi: "20 kg",
-        jumlahBagasiCabin: "7 kg",
-        harga: "5.250.000",
-      },
-    },
-    {
-      detailPesawat: {
-        nomorPesawat: "QZ-851",
-        namaPesawat: "air asia",
-        jenisPesawat: "ekonomi",
-      },
-      detailTerbang: {
-        jamDeparture: "09:30",
-        tanggalDeparture: "19 Februari 2023",
-        bandaraDeparture: "CGK",
-        jamArrival: "15:15",
-        tanggalArrival: "19 Februari 2023",
-        bandaraArrival: "HKG",
-        durasi: "5h 45m",
-        transit: "direct",
-      },
-      detailLainnya: {
-        jumlahBagasi: "20 kg",
-        jumlahBagasiCabin: "7 kg",
-        harga: "5.250.000",
-      },
-    },
-    {
-      detailPesawat: {
-        nomorPesawat: "JT-851",
-        namaPesawat: "Lion",
-        jenisPesawat: "ekonomi",
-      },
-      detailTerbang: {
-        jamDeparture: "09:30",
-        tanggalDeparture: "19 Februari 2023",
-        bandaraDeparture: "CGK",
-        jamArrival: "15:15",
-        tanggalArrival: "19 Februari 2023",
-        bandaraArrival: "HKG",
-        durasi: "5h 45m",
-        transit: "direct",
-      },
-      detailLainnya: {
-        jumlahBagasi: "20 kg",
-        jumlahBagasiCabin: "7 kg",
-        harga: "5.250.000",
-      },
-    },
-    {
-      detailPesawat: {
-        nomorPesawat: "QG-851",
-        namaPesawat: "City Link",
-        jenisPesawat: "ekonomi",
-      },
-      detailTerbang: {
-        jamDeparture: "09:30",
-        tanggalDeparture: "19 Februari 2023",
-        bandaraDeparture: "CGK",
-        jamArrival: "15:15",
-        tanggalArrival: "19 Februari 2023",
-        bandaraArrival: "HKG",
-        durasi: "5h 45m",
-        transit: "direct",
-      },
-      detailLainnya: {
-        jumlahBagasi: "20 kg",
-        jumlahBagasiCabin: "7 kg",
-        harga: "5.250.000",
-      },
-    },
-  ];
-
   const dispatch = useDispatch();
 
   const schedule = useSelector((state) => state.search.filter);
@@ -167,15 +34,8 @@ const Search = () => {
   const titleSchedule = schedule[0];
 
   const sliceMethod = () => {
-    // if (schedule.length === sliceNext - 1) {
-    //   setSlice(0);
-    //   setSliceNext(3);
-    // } else {
-    //   setSlice(slice + 3);
     setSliceNext(sliceNext + 3);
-    // }
   };
-
   useEffect(() => {
     dispatch(getAllSchedule());
   }, [dispatch]);

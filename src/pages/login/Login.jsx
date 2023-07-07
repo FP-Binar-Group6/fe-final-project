@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import "./login.css";
 import auth from "../../assets/auth.jpg";
@@ -28,6 +29,7 @@ const Login = () => {
     }
     dispatch(login(data, navigate));
   };
+
 
   return (
     <div className="Login">

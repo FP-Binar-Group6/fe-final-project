@@ -26,8 +26,6 @@ const DestinationCards = () => {
 
   const destinasiFavorite = useSelector((state) => state.home.destinationFav);
 
-  // console.log(destinasiFavorite);
-
   const submitHandle = (
     departureAirportId,
     arrivalAirportId,
@@ -67,12 +65,10 @@ const DestinationCards = () => {
   useEffect(() => {
     dispatch(getAllDestinationFav());
   }, [dispatch]);
-
-  // console.log(destinasiFavorite);
-
   return (
     <div className="destination_favorite">
       <h6>Destinasi Favorit</h6>
+
 
       <div className="destination_cards">
         <Swiper

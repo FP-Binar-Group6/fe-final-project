@@ -12,6 +12,7 @@ const bookingSlicer = createSlice({
   name: "booking",
   initialState,
   reducers: {
+
     setScheduleId: (state, action) => {
       state.scheduleId = action.payload;
     },
@@ -33,9 +34,11 @@ const bookingSlicer = createSlice({
         localStorage.removeItem("bookingCode");
       }
       state.bookingCode = action.payload;
+
     },
   },
 });
+
 
 // setScheduleId, setDataPemesan, setDataPenumpang, setPaymentStatus, and setBookingCode can be accessed in any files in this project
 export const {
@@ -45,6 +48,7 @@ export const {
   setPaymentId,
   setBookingCode,
 } = bookingSlicer.actions;
+
 
 // export the global state / reducers
 export default bookingSlicer.reducer;
