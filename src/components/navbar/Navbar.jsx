@@ -6,23 +6,34 @@ import LoginIcon from "@mui/icons-material/Login";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useNavigate } from "react-router-dom";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import { useDispatch, useSelector } from "react-redux";
 import { getNotif } from "../../redux/actions/notif";
+import { useSelector, useDispatch } from "react-redux";
+import { getProfile, logout } from "../../redux/actions/auth";
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const isLoggedIn = true;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const pointer = { cursor: "pointer" };
   const { notifs } = useSelector((state) => state.notif);
 
+//   useEffect(() => {
+//     dispatch(getNotif());
+//   }, [dispatch]);
+//   console.log(notifs);
+
+  const { isLoggedIn, token, user } = useSelector((state) => state.auth);
+
   useEffect(() => {
-    dispatch(getNotif());
-  }, [dispatch]);
-  console.log(notifs);
+  dispatch(getNotif());
+    if (isLoggedIn && token) {
+      dispatch(getProfile(navigate));
+    }
+  }, [dispatch, isLoggedIn, navigate, token]);
 
   return (
     <div className="navbarr">
@@ -56,6 +67,11 @@ const Navbar = () => {
               style={pointer}
               onClick={() => navigate("/profile")}
             />
+               <LogoutIcon
+              sx={{ fontSize: 24 }}
+              style={pointer}
+              onClick={() => dispatch(logout(navigate))}
+            />
           </div>
         </div>
       ) : (
@@ -70,6 +86,6 @@ const Navbar = () => {
       )}
     </div>
   );
-};
+};  
 
 export default Navbar;

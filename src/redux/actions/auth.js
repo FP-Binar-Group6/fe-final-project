@@ -1,22 +1,23 @@
 import axios from "axios";
-import { setIsLoggedIn, setToken, setUser } from "../reducers/auth";
+import { setIsLoggedIn, setToken, setUser, setUserId } from "../reducers/auth";
 import { toast } from "react-toastify";
 
 export const login = (data, navigate) => async (dispatch) => {
   try {
     const response = await axios.post(
-      `https://be-airticket-a6bnbhk5xa-as.a.run.app/api/auth/login`,
+      `${process.env.REACT_APP_AUTH_AirTicket}/api/auth/login`,
       data,
       { "Content-Type": "application/json" }
     );
 
-    const { token } = response?.data;
-
+    const token = response?.data?.token;
     dispatch(setToken(token));
+    dispatch(setUserId(userId));
     dispatch(setIsLoggedIn(true));
-    console.log(token);
+
     toast.success("Log in succes");
     navigate("/");
+    
   } catch (error) {
     if (axios.isAxiosError(error)) {
       toast.error(error?.response?.data?.message || error?.message);
@@ -32,11 +33,11 @@ export const register = (data, navigate) => async (dispatch) => {
       `${process.env.REACT_APP_AUTH_AirTicket}/api/auth/register`,
       data,
       { "Content-Type": "application/json" }
-    );
-
-    const { token } = response?.data;
+    );  
+    const token = response?.data?.token;
 
     dispatch(setToken(token));
+    dispatch(setUserId(userId));
     dispatch(setIsLoggedIn(true));
 
     navigate("/");
@@ -81,6 +82,7 @@ export const getProfile = (navigate) => async (dispatch, getState) => {
 export const logout = (navigate) => async (dispatch) => {
   dispatch(setToken(null));
   dispatch(setIsLoggedIn(false));
+  dispatch(setUserId(null));
   dispatch(setUser(null));
 
   // redirect to home
