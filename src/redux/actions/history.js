@@ -8,9 +8,8 @@ const baseUrl = process.env.REACT_APP_AUTH_AirTicket;
 
 export const getHistory = () => async (dispatch, getState) => {
   try {
-    const { token } = getState().auth;
-    console.log(token);
-    const response = await axios.get(`${baseUrl}/api/payment/history/17`, {
+    const { token, userId } = getState().auth;
+    const response = await axios.get(`${baseUrl}/api/payment/history/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -25,9 +24,4 @@ export const getHistory = () => async (dispatch, getState) => {
     }
     toast.error(error?.message);
   }
-};
-
-export const searchHistory = async (q) => {
-  const search = await axios.get(`${baseUrl}/`);
-  return search.data;
 };

@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  scheduleId: "",
-  dataPemesan: null,
-  dataPenumpang: [],
-  paymentId: "",
-  bookingCode: localStorage.getItem("bookingCode") || null,
+    scheduleId: "",
+    dataPemesan: null,
+    dataPenumpang: [],
+    paymentId:"",
+    bookingCode: localStorage.getItem("bookingCode") || null,
+    penumpang: 0
 };
 
 const bookingSlicer = createSlice({
@@ -23,7 +24,6 @@ const bookingSlicer = createSlice({
     setDataPenumpang: (state, action) => {
       state.dataPenumpang = action.payload;
     },
-
     setPaymentId: (state, action) => {
       state.paymentId = action.payload;
     },
@@ -34,20 +34,16 @@ const bookingSlicer = createSlice({
         localStorage.removeItem("bookingCode");
       }
       state.bookingCode = action.payload;
-
+    },
+    setPenumpang: (state, action) => {
+      state.penumpang = action.payload;
     },
   },
 });
 
 
-// setScheduleId, setDataPemesan, setDataPenumpang, setPaymentStatus, and setBookingCode can be accessed in any files in this project
-export const {
-  setScheduleId,
-  setDataPemesan,
-  setDataPenumpang,
-  setPaymentId,
-  setBookingCode,
-} = bookingSlicer.actions;
+// setScheduleId, setDataPemesan, setDataPenumpang, setPaymentStatus, setBookingCode, and setPenumpang can be accessed in any files in this project
+export const { setScheduleId, setDataPemesan, setDataPenumpang, setPaymentId, setBookingCode, setPenumpang } = bookingSlicer.actions;
 
 
 // export the global state / reducers

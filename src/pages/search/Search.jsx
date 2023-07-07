@@ -14,7 +14,6 @@ import "swiper/css/pagination";
 import SearchFilterItem from "../../components/searchFilterItem/SearchFilterItem";
 import SearchFlight from "../../components/searchFlight/SearchFlight";
 import { useDispatch, useSelector } from "react-redux";
-import { getSchedules } from "../../redux/actions/schedule";
 import { getAllSchedule } from "../../redux/actions/search";
 import { Navigate } from "react-router-dom";
 
@@ -23,9 +22,8 @@ const Search = () => {
 
   const [openFilterModal, setOpenFilterModal] = useState(false);
   const [ubahPencarianOpen, setUbahPencarianOpen] = useState(false);
-  const [showMore, setShowmore] = useState(false);
-  const [slice, setSlice] = useState(0);
   const [sliceNext, setSliceNext] = useState(3);
+
 
   const dispatch = useDispatch();
 

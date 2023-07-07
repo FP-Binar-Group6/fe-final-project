@@ -7,28 +7,22 @@ import AirlineSeatReclineNormalIcon from "@mui/icons-material/AirlineSeatRecline
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import ManIcon from "@mui/icons-material/Man";
 import GirlIcon from "@mui/icons-material/Girl";
-import ChildCareIcon from "@mui/icons-material/ChildCare";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import CloseIcon from "@mui/icons-material/Close";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import SearchIcon from "@mui/icons-material/Search";
-
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { DateRangeCalendar } from "@mui/x-date-pickers-pro/DateRangeCalendar";
 
 import { format } from "date-fns";
 import { Calendar } from "react-date-range";
-import "react-date-range/dist/styles.css";
-import "react-date-range/dist/theme/default.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllAirport, getAllClass } from "../../redux/actions/home";
 
 // import { getPostAirport } from "../../redux/actions/post";
 import { FlightLand } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
-import { setSchedule, setSearch } from "../../redux/reducers/search";
+import { useNavigate } from "react-router-dom";
 import { getSearchSchedule } from "../../redux/actions/search";
+import { setPenumpang } from "../../redux/reducers/booking";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
 import { toast } from "react-toastify";
 
@@ -47,7 +41,6 @@ const SearchFlight = () => {
   const [filterNameFrom, setFilterNameFrom] = useState("");
   const [destinationFrom, setDestinationFrom] = useState("");
   const [destinationTo, setDestinationTo] = useState("");
-
 
   const [seatClass, setSeatClass] = useState("");
   const [passenger, setPassenger] = useState({
@@ -68,7 +61,6 @@ const SearchFlight = () => {
 
   const airport = useSelector((state) => state.home.airport);
   const classes = useSelector((state) => state.home.class);
-  const search = useSelector((state) => state.search.filter);
 
   const submitHandle = () => {
     if (
@@ -86,7 +78,6 @@ const SearchFlight = () => {
         className,
         passenger,
       };
-
       dispatch(
         getSearchSchedule(
           departureTime,
@@ -97,29 +88,15 @@ const SearchFlight = () => {
           navigate
         )
       );
+      const jumPenumpang = passenger.adult + passenger.children;
+      dispatch(setPenumpang(jumPenumpang));
     }
   };
 
   useEffect(() => {
-    // dispatch(
-    //   getSearchSchedule(
-    //     departureTime,
-    //     departureAirportId,
-    //     arrivalAirportId,
-    //     className,
-    //     navigate
-    //   )
-    // );
     dispatch(getAllAirport());
     dispatch(getAllClass());
-  }, [
-    dispatch,
-    // departureTime,
-    // departureAirportId,
-    // arrivalAirportId,
-    // className,
-    // navigate,
-  ]);
+  }, [dispatch]);
   const handleOption = (name, operation) => {
     setPassenger((prev) => {
       return {
@@ -237,7 +214,7 @@ const SearchFlight = () => {
                   <span>Hapus</span>
                 </div>
                 {airport?.length > 0 &&
-                  airport.map((e) => (
+                  airport.map((e, i) => (
                     <div
                       className="latestSeachItem"
                       onClick={() => {
@@ -245,6 +222,7 @@ const SearchFlight = () => {
                         setArrivalId(e?.airportId);
                         setopenDestinationTo(!openDestinationTo);
                       }}
+                      key={i}
                     >
                       <p>{e?.cityName}</p>
                       <CloseIcon style={{ color: "#8A8A8A" }} />
@@ -280,7 +258,6 @@ const SearchFlight = () => {
                     color="#7126B5"
                     disabledDays={{ before: new Date() }}
                   />
-                  {/* <DateRangeCalendar onChange={handleCalender} date = {new Date()}/> */}
                 </div>
               )}
             </div>
@@ -307,7 +284,6 @@ const SearchFlight = () => {
                       color="#7126B5"
                       disabledDays={{ before: new Date(calenderDeparture) }}
                     />
-                    {/* <DateRangeCalendar onChange={handleCalender} date = {new Date()}/> */}
                   </div>
                 )}
               </div>
@@ -459,9 +435,6 @@ const SearchFlight = () => {
                             <label>{e?.name}</label>
                             <p>IDR. {priceConvert}</p>
                           </div>
-                          {/* <div className="option_counter">
-                            <CheckCircleIcon style={{ color: "#73CA5C" }} />
-                          </div> */}
                         </div>
                         <hr />
                       </>

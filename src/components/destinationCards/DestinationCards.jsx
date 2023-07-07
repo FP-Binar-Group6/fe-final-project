@@ -3,12 +3,9 @@ import "./destinationCards.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
-import destinasiFav from "../../assets/images/destinasiFav.png";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import imageDestination1 from "../../assets/homepage-image/destination_card_option.png";
 import { Autoplay } from "swiper";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllDestinationFav } from "../../redux/actions/home";
@@ -32,15 +29,6 @@ const DestinationCards = () => {
     departureTime,
     className
   ) => {
-    // e.preventDefault();
-
-    // if (
-    //   // departureTime == undefined &&
-    //   departureAirportId == undefined &&
-    //   arrivalAirportId == undefined
-    // ) {
-    //   alert("isi blok");
-    // } else {
     const data = {
       departureTime,
       departureAirportId,

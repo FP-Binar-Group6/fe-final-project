@@ -20,15 +20,9 @@ const Navbar = () => {
   const pointer = { cursor: "pointer" };
   const { notifs } = useSelector((state) => state.notif);
 
-  //   useEffect(() => {
-  //     dispatch(getNotif());
-  //   }, [dispatch]);
-  //   console.log(notifs);
-
-  const { isLoggedIn, token, user } = useSelector((state) => state.auth);
+  const { isLoggedIn, token } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getNotif());
     if (isLoggedIn && token) {
       dispatch(getProfile(navigate));
     }

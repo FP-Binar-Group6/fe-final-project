@@ -13,7 +13,6 @@ export const getAllSchedule =
       const { data } = response?.data;
       dispatch(setSchedule(data));
     } catch (error) {
-      console.log("untuk munculin error", error);
       if (axios.isAxiosError(error)) {
         toast.error(error?.response?.data?.message);
         return;

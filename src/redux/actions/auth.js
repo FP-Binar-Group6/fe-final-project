@@ -39,6 +39,7 @@ export const register = (data, navigate) => async (dispatch) => {
     const token = response?.data?.token;
     const userId = response?.data?.userId;
 
+
     dispatch(setToken(token));
     dispatch(setUserId(userId));
 

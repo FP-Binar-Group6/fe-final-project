@@ -51,12 +51,11 @@ export const saveDataPemesan = (pemesan, navigate) => async (dispatch) => {
 
 export const payment = (navigate) => async (dispatch, getState) => {
   try {
-    const { userId, token } = getState().auth;
+    const { token } = getState().auth;
     const { paymentId, bookingCode } = getState().booking;
 
     let data = JSON.stringify({
-      userId: `${userId}`,
-      paymentMethodId: `${paymentId}`,
+      "paymentMethodId": `${paymentId}`
     });
 
     let config = {
@@ -83,4 +82,4 @@ export const payment = (navigate) => async (dispatch, getState) => {
     }
     toast.error(error?.message);
   }
-};
+}
