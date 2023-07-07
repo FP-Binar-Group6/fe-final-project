@@ -10,7 +10,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useNavigate } from "react-router-dom";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import { useDispatch, useSelector } from "react-redux";
-// import { getNotif } from "../../redux/actions/notif";
+import { getNotif } from "../../redux/actions/notif";
 import { getProfile, logout } from "../../redux/actions/auth";
 
 const Navbar = () => {

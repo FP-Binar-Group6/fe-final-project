@@ -11,14 +11,15 @@ export const login = (data, navigate) => async (dispatch) => {
       { "Content-Type": "application/json" }
     );
 
-    const {token, userId} = response?.data;
+    const token = response?.data?.token;
+    const userId = response?.data?.userId;
+
     dispatch(setToken(token));
     dispatch(setUserId(userId));
     dispatch(setIsLoggedIn(true));
 
     toast.success("Log in succes");
     navigate("/");
-    
   } catch (error) {
     if (axios.isAxiosError(error)) {
       toast.error(error?.response?.data?.message || error?.message);
@@ -34,9 +35,10 @@ export const register = (data, navigate) => async (dispatch) => {
       `${process.env.REACT_APP_AUTH_AirTicket}/api/auth/register`,
       data,
       { "Content-Type": "application/json" }
+    );
+    const token = response?.data?.token;
+    const userId = response?.data?.userId;
 
-    );  
-    const {token, userId} = response?.data;
 
     dispatch(setToken(token));
     dispatch(setUserId(userId));
@@ -57,9 +59,10 @@ export const register = (data, navigate) => async (dispatch) => {
 export const getProfile = (navigate) => async (dispatch, getState) => {
   try {
     const { token } = getState().auth;
+    const { userId } = getState().auth;
 
     const response = await axios.get(
-      `${process.env.REACT_APP_AUTH_AirTicket}/api/user`,
+      `${process.env.REACT_APP_AUTH_AirTicket}/api/user/${userId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -68,6 +71,7 @@ export const getProfile = (navigate) => async (dispatch, getState) => {
     );
 
     const { data } = response?.data;
+
     dispatch(setUser(data));
   } catch (error) {
     if (axios.isAxiosError(error)) {

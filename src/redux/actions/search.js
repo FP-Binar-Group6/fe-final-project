@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { setSchedule, setSearch } from "../reducers/search";
+import { setPassenger, setSchedule, setSearch } from "../reducers/search";
 
 export const getAllSchedule =
   (navigate, departureTime, departureAirportId, arrivalAirportId, className) =>
@@ -23,15 +23,26 @@ export const getAllSchedule =
   };
 
 export const getSearchSchedule =
-  (departureTime, departureAirportId, arrivalAirportId, className, navigate) =>
+  (
+    departureTime,
+    departureAirportId,
+    arrivalAirportId,
+    className,
+    passanger,
+    navigate
+  ) =>
   async (dispatch, getState) => {
     try {
       const response = await axios.get(
         `https://be-airticket-a6bnbhk5xa-as.a.run.app/api/schedule/search?departureTime=${departureTime}&departureAirportId=${departureAirportId}&arrivalAirportId=${arrivalAirportId}&className=${className}`
       );
+
       const { data } = response?.data;
 
       dispatch(setSearch(data));
+
+      dispatch(setPassenger(passanger));
+
       navigate("/search");
     } catch (error) {
       if (axios.isAxiosError(error)) {

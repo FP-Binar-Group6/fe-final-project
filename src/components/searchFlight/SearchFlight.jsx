@@ -24,6 +24,9 @@ import { setPenumpang } from "../../redux/reducers/booking";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
+import { toast } from "react-toastify";
+
+
 const SearchFlight = () => {
   const [showSwitch, setshowSwitch] = useState(false);
   const [openPassenger, setopenPassenger] = useState(false);
@@ -65,14 +68,23 @@ const SearchFlight = () => {
       departureAirportId == undefined &&
       arrivalAirportId == null
     ) {
-      alert("Please fill up the form");
+      toast.error(`Lengkapi form pencarian terlebih dahulu!`);
+
     } else {
+      const data = {
+        departureTime,
+        departureAirportId,
+        arrivalAirportId,
+        className,
+        passenger,
+      };
       dispatch(
         getSearchSchedule(
           departureTime,
           departureAirportId,
           arrivalAirportId,
           className,
+          passenger,
           navigate
         )
       );
@@ -242,7 +254,6 @@ const SearchFlight = () => {
                   <Calendar
                     onChange={handleCalenderDeparture}
                     date={new Date()}
-                    minDate={new Date()}
                     className="CalendarElement"
                     color="#7126B5"
                     disabledDays={{ before: new Date() }}
@@ -279,16 +290,6 @@ const SearchFlight = () => {
             ) : (
               <div className="returnNotOpen"></div>
             )}
-          </div>
-
-          <div className="form-check form-switch">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              role="switch"
-              id="flexSwitchCheckDefault"
-              onClick={() => setshowSwitch(!showSwitch)}
-            />
           </div>
 
           <div className="passenger_container">
@@ -418,8 +419,6 @@ const SearchFlight = () => {
                       style: "decimal",
                       currency: "IDR",
                     }).format(e?.price);
-
-                    console.log(priceConvert);
 
                     return (
                       <>

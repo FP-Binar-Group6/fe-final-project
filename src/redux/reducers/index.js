@@ -5,8 +5,8 @@ import auth from "./auth";
 import search from "./search";
 import history from "./history";
 import notif from "./notif";
-import booking from "./booking"
-import user from "./user"
+import booking from "./booking";
+import user from "./user";
 
 export default combineReducers({
   home,
@@ -17,4 +17,3 @@ export default combineReducers({
   history,
   notif,
 });
-

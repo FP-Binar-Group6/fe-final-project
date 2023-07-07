@@ -8,17 +8,17 @@ import { updateProfile } from "../../redux/actions/user";
 import { toast } from "react-toastify";
 
 const Profile = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [changeEmail, setChangeEmail] = useState("");
-  const [changeName, setChangeName] = useState("");
-  const [changePhoneNumber, setChangePhoneNumber] = useState("");
-
   useEffect(() => {
     dispatch(getProfile());
-  }, [dispatch]);
+  }, []);
 
-  const { user } = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.auth.user[0]);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [changeEmail, setChangeEmail] = useState(user?.email);
+  const [changeName, setChangeName] = useState("");
+  const [changePhoneNumber, setChangePhoneNumber] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,7 +35,7 @@ const Profile = () => {
 
     dispatch(
       updateProfile({
-        userId: user.find((e) => e.email === changeEmail).userId,
+        userId: user.userId,
         name: changeName,
         email: changeEmail,
         phoneNumber: changePhoneNumber,
@@ -82,24 +82,25 @@ const Profile = () => {
               <form className="ubahProfilForm" onSubmit={handleSubmit}>
                 <p className="inputTitle">Nama Lengkap</p>
                 <input
-                  placeholder="Nama"
+                  placeholder={user?.name}
                   type="text"
                   value={changeName}
                   onChange={(e) => setChangeName(e.target.value)}
                 />
                 <p className="inputTitle">Nomor Telepon</p>
                 <input
-                  placeholder="Nomor Telepon"
+                  placeholder={user?.phoneNumber}
                   type="text"
                   value={changePhoneNumber}
                   onChange={(e) => setChangePhoneNumber(e.target.value)}
                 />
                 <p className="inputTitle">Email</p>
                 <input
-                  placeholder="Masukkan Email Anda"
+                  placeholder={user?.email}
                   type="email"
                   value={changeEmail}
                   onChange={(e) => setChangeEmail(e.target.value)}
+                  disabled
                 />
 
                 <button type="submit">Simpan</button>

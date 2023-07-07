@@ -29,7 +29,7 @@ const bookingSlicer = createSlice({
     },
     setBookingCode: (state, action) => {
       if (action.payload) {
-        localStorage.setItem("bookingCode", (action.payload));
+        localStorage.setItem("bookingCode", action.payload);
       } else {
         localStorage.removeItem("bookingCode");
       }

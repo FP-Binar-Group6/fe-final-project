@@ -12,8 +12,6 @@ import { getAllDestinationFav } from "../../redux/actions/home";
 import { useNavigate } from "react-router-dom";
 import { getSearchSchedule } from "../../redux/actions/search";
 
-const types = ["Semua", "Asia", "Amerika", "Australia", "Eropa", "Afrika"];
-
 const DestinationCards = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,27 +23,40 @@ const DestinationCards = () => {
 
   const destinasiFavorite = useSelector((state) => state.home.destinationFav);
 
+  const submitHandle = (
+    departureAirportId,
+    arrivalAirportId,
+    departureTime,
+    className
+  ) => {
+    const data = {
+      departureTime,
+      departureAirportId,
+      arrivalAirportId,
+      className,
+    };
+
+    navigate("/search");
+
+    dispatch(
+      getSearchSchedule(
+        departureTime,
+        departureAirportId,
+        arrivalAirportId,
+        className,
+        navigate
+      )
+    );
+    // }
+  };
+
   useEffect(() => {
     dispatch(getAllDestinationFav());
   }, [dispatch]);
-
-  const [active, setActive] = useState(types[0]);
   return (
     <div className="destination_favorite">
       <h6>Destinasi Favorit</h6>
-      <div className="destination_category">
-        {types.map((e, i) => (
-          <div
-            className="destination_category_option"
-            key={i}
-            active={active == e.toString()}
-            onClick={() => setActive(e)}
-          >
-            <SearchIcon />
-            {e}
-          </div>
-        ))}
-      </div>
+
 
       <div className="destination_cards">
         <Swiper

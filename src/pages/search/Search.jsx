@@ -15,6 +15,7 @@ import SearchFilterItem from "../../components/searchFilterItem/SearchFilterItem
 import SearchFlight from "../../components/searchFlight/SearchFlight";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSchedule } from "../../redux/actions/search";
+import { Navigate } from "react-router-dom";
 
 const Search = () => {
   const filterUrutan = "Termurah";
@@ -23,56 +24,16 @@ const Search = () => {
   const [ubahPencarianOpen, setUbahPencarianOpen] = useState(false);
   const [sliceNext, setSliceNext] = useState(3);
 
-  const pencarian = {
-    kotaAwal: "jakarta",
-    kotaAkhir: "surabaya",
-    jumlahPenumpang: 1,
-    jenisPesawat: "Ekonomi",
-  };
-
-  const calendar = [
-    {
-      display: "Senin",
-      date: "02/03/2002",
-    },
-    {
-      display: "Selasa",
-      date: "02/03/2002",
-    },
-    {
-      display: "Rabu",
-      date: "02/03/2002",
-    },
-    {
-      display: "Kamis",
-      date: "02/03/2002",
-    },
-    {
-      display: "Jumat",
-      date: "02/03/2002",
-    },
-    {
-      display: "Sabtu",
-      date: "02/03/2002",
-    },
-    {
-      display: "Minggu",
-      date: "02/03/2002",
-    },
-    {
-      display: "Senin",
-      date: "02/03/2002",
-    },
-  ];
 
   const dispatch = useDispatch();
 
   const schedule = useSelector((state) => state.search.filter);
 
+  const titleSchedule = schedule[0];
+
   const sliceMethod = () => {
     setSliceNext(sliceNext + 3);
   };
-
   useEffect(() => {
     dispatch(getAllSchedule());
   }, [dispatch]);
@@ -90,31 +51,29 @@ const Search = () => {
               />
               <div className="searchResultText">
                 <p className="adaalah">
-                  {pencarian.kotaAwal} &#62; {pencarian.kotaAkhir}{" "}
+                  {titleSchedule?.departureAirport?.cityName} &#62;{" "}
+                  {titleSchedule?.arrivalAirport?.cityName}{" "}
                 </p>
                 <span className="searchResultTextSub1">
                   {" "}
                   &#160; - {pencarian.jumlahPenumpang} Penumpang -{" "}
-                  {pencarian.jenisPesawat}
+                  {titleSchedule?.kelas?.name}
                 </span>
                 <span className="searchResultTextSub2">
                   {pencarian.jumlahPenumpang} Penumpang -{" "}
-                  {pencarian.jenisPesawat}
+                  {titleSchedule?.kelas?.name}
                 </span>
               </div>
             </div>
             <div
               className="searchBtnUbah"
-              onClick={() => setUbahPencarianOpen(!ubahPencarianOpen)}
+              onClick={() => window.history.back()}
             >
               <p className="adaalah">Ubah Pencarian</p>
               <div className="searchBtnUbahBtn">
                 <KeyboardArrowDown />
               </div>
             </div>
-            {ubahPencarianOpen && (
-              <SearchFlight className="searchBtnUbahModal" />
-            )}
           </div>
           <div className="searchResultDate">
             <Swiper
@@ -165,9 +124,9 @@ const Search = () => {
           )}
         </div>
         <div className="searchItem">
-          <div className="searchItemLeft">
+          {/* <div className="searchItemLeft">
             <SearchFilterItem />
-          </div>
+          </div> */}
           <div className="searchItemRight">
             {schedule.length !== 0 ? (
               schedule

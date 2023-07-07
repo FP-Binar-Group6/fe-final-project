@@ -17,6 +17,9 @@ const BiodataForm = () => {
   const location = useLocation();
   const isPenumpang = location.pathname === "/booking/penumpang";
 
+  const scheduleSearch = useSelector((state) => state.search.filter);
+  const scheduleSelected = scheduleSearch[0];
+
   // hook usestate untuk switch nama keluarga
   const [checkedPemesan, setCheckedPemesan] = useState(false);
   const [checkedPenumpang, setCheckedPenumpang] = useState(false);
@@ -36,6 +39,9 @@ const BiodataForm = () => {
   const [idCardNumber, setIdCardNumber] = useState("");
   const [penerbit, setPenerbit] = useState("");
   const [berlaku, setBerlaku] = useState("");
+  const [scheduleId, setScheduleId] = useState(scheduleSelected?.scheduleId);
+
+  console.log(scheduleId);
 
   const [index, setIndex] = useState(0);
 
@@ -76,8 +82,8 @@ const BiodataForm = () => {
         lastName,
         birthDate,
         nationality,
-        idCardNumber,
-        scheduleId: 2,
+        idCardNumber,=
+        scheduleId,
         userId,
       };
       dispatch(setDataPenumpang([...dataPenumpang, data]));
