@@ -4,11 +4,10 @@ import { toast } from "react-toastify";
 
 export const login = (data, navigate) => async (dispatch) => {
   try {
-    
     const response = await axios.post(
       `${process.env.REACT_APP_AUTH_AirTicket}/api/auth/login`,
       data,
-      { "Content-Type": "application/json" } 
+      { "Content-Type": "application/json" }
     );
 
     const token = response?.data?.token;
@@ -21,7 +20,7 @@ export const login = (data, navigate) => async (dispatch) => {
     
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      toast.error(error?.response?.data?.message|| error?.message);
+      toast.error(error?.response?.data?.message || error?.message);
       return;
     }
     toast.error(error.message);
@@ -43,16 +42,14 @@ export const register = (data, navigate) => async (dispatch) => {
 
     navigate("/");
   } catch (error) {
-
     if (axios.isAxiosError(error)) {
-      toast.error(error?.response?.data?.message|| error?.message) 
- 
+      toast.error(error?.response?.data?.message || error?.message);
+
       return;
     }
     toast.error(error.message);
   }
 };
-
 
 export const getProfile = (navigate) => async (dispatch, getState) => {
   try {
@@ -91,4 +88,3 @@ export const logout = (navigate) => async (dispatch) => {
   // redirect to home
   if (navigate) navigate("/login");
 };
-

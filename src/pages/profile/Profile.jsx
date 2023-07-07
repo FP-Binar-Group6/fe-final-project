@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import './profile.css'
 import { ArrowBack, Create, Output } from '@mui/icons-material'
@@ -120,8 +121,9 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
+          </div>
         </div>
     )
 }
 
-export default Profile
+export default Profile;
