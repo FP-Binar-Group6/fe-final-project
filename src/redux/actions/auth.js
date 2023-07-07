@@ -11,7 +11,7 @@ export const login = (data, navigate) => async (dispatch) => {
       { "Content-Type": "application/json" }
     );
 
-    const token = response?.data?.token;
+    const {token, userId} = response?.data;
     dispatch(setToken(token));
     dispatch(setUserId(userId));
     dispatch(setIsLoggedIn(true));
@@ -36,7 +36,7 @@ export const register = (data, navigate) => async (dispatch) => {
       { "Content-Type": "application/json" }
 
     );  
-    const token = response?.data?.token;
+    const {token, userId} = response?.data;
 
     dispatch(setToken(token));
     dispatch(setUserId(userId));

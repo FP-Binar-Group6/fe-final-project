@@ -139,7 +139,7 @@ function App() {
     //   </BrowserRouter>
 
     <Provider store={store}>
-//     <BrowserRouter>
+{/* //     <BrowserRouter>
 //       <Navbar />
 //       <ToastContainer theme="colored"/>
 //       <Routes>
@@ -158,7 +158,7 @@ function App() {
 //         <Route path="/profile" element={<Profile />} />
 //       </Routes>
 //     </BrowserRouter>
-//     </Provider>
+//     </Provider> */}
 
       <BrowserRouter>
         <Navbar />
@@ -193,7 +193,8 @@ function App() {
               </Protected>
             }
           />
-
+          <Route path="/booking/pemesan" element={<Booking />} />
+          <Route path="/booking/penumpang" element={<Booking />} />
           <Route path="/booking/checkout" element={<Booking />} />
           <Route path="/booking/payment" element={<Booking />} />
           <Route path="/booking/success" element={<Booking />} />

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
+import React, { useEffect } from "react";
 import WestIcon from "@mui/icons-material/West";
 import "./history.css";
 import {
@@ -7,18 +6,14 @@ import {
   Row,
   Col,
   Button,
-  Modal,
-  Form,
   Badge,
   Card,
   Accordion,
 } from "react-bootstrap";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import Ilustration from "../../assets/Ilustration.png";
 import airline from "../../assets/airline.png";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import DatePickerRanger from "../../components/datepicker/DatePickerRange";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getHistory } from "../../redux/actions/history";
@@ -26,9 +21,6 @@ import { getHistory } from "../../redux/actions/history";
 const History = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [smShow, setSmShow] = useState(false);
-  const [datepicker, setDatepicker] = useState(false);
-  const [query, setQuery] = useState("");
 
   const { historys } = useSelector((state) => state.history);
 
@@ -46,11 +38,11 @@ const History = () => {
       >
         <Row className="d-flex justify-content-center">
           <Col className="mt-5 me-5" xs={8}>
-            <h5>Beranda</h5>
+            <h5>Riwayat Pemesanan</h5>
           </Col>
         </Row>
         <Row className="d-flex align-items-center justify-content-center me-3 mt-3">
-          <Col xs={6} className="pb-2">
+          <Col xs={8} className="pb-2">
             <div
               onClick={() => navigate("/")}
               className="d-flex align-items-center  p-2 ps-2"
@@ -64,164 +56,6 @@ const History = () => {
               Beranda
             </div>
           </Col>
-
-          {/* visible in lg */}
-          <Col xs={2} className="d-flex d-none  d-lg-block">
-            <Button
-              onClick={() => setDatepicker(true)}
-              className="ms-1 mb-2 "
-              variant="transparant"
-              style={{
-                borderRadius: "24px",
-                border: "solid #A06ECE",
-              }}
-            >
-              <FilterAltOutlinedIcon
-                sx={{ fontSize: 25 }}
-                style={{ color: "#8A8A8A" }}
-              />
-              Filter
-            </Button>
-
-            <SearchOutlinedIcon
-              className=" ms-3 mb-2"
-              onClick={() => setSmShow(true)}
-              sx={{ fontSize: 40 }}
-              style={{ color: "#A06ECE", cursor: "pointer" }}
-            />
-          </Col>
-
-          {/* visible only in md */}
-          <Col xs={3} className="d-flex d-none d-md-block d-lg-none">
-            <Button
-              onClick={() => setDatepicker(true)}
-              className="mb-2 "
-              variant="transparant"
-              style={{
-                borderRadius: "24px",
-                border: "solid #A06ECE",
-              }}
-            >
-              <FilterAltOutlinedIcon
-                sx={{ fontSize: 25 }}
-                style={{ color: "#8A8A8A" }}
-              />
-              Filter
-            </Button>
-
-            <SearchOutlinedIcon
-              className=" ms-3 mb-2"
-              onClick={() => setSmShow(true)}
-              sx={{ fontSize: 40 }}
-              style={{ color: "#A06ECE", cursor: "pointer" }}
-            />
-          </Col>
-
-          {/* visible only in sm/xs */}
-          <Col xs={5} className="d-flex d-block d-sm-none">
-            <Button
-              onClick={() => setDatepicker(true)}
-              className="mb-2 d-flex"
-              variant="transparant"
-              style={{
-                width: "6rem",
-                borderRadius: "24px",
-                border: "solid #A06ECE",
-              }}
-            >
-              <FilterAltOutlinedIcon
-                sx={{ fontSize: 25 }}
-                style={{ color: "#8A8A8A" }}
-              />
-              Filter
-            </Button>
-
-            <SearchOutlinedIcon
-              className=" ms-3 mb-2"
-              onClick={() => setSmShow(true)}
-              sx={{ fontSize: 40 }}
-              style={{ color: "#A06ECE", cursor: "pointer" }}
-            />
-          </Col>
-
-          {/* Modal Seacrh */}
-          <Modal
-            size="md"
-            show={smShow}
-            centered
-            onHide={() => setSmShow(false)}
-            aria-labelledby="example-modal-sizes-title-xs"
-          >
-            <Modal.Header closeButton>
-              <Modal.Title id="example-modal-sizes-title-xs">
-                <Form.Group
-                  className="mb-1 d-flex align-items-center"
-                  controlId="formBasicEmail"
-                >
-                  <Form.Control
-                    className="d-none d-md-block d-lg-block"
-                    style={{
-                      width: "23rem",
-                      borderRadius: "8px 0 0 8px",
-                    }}
-                    type="text"
-                    placeholder="Masukan Nomor Penerbangan"
-                    onChange={(e) => {
-                      setQuery(e.target.value);
-                    }}
-                    value={query}
-                  />
-                  <Form.Control
-                    className="d-block d-sm-none"
-                    style={{
-                      width: "12rem",
-                      borderRadius: "8px 0 0 8px",
-                    }}
-                    type="text"
-                    placeholder="Masukan Nomor Penerbangan"
-                    onChange={(e) => {
-                      setQuery(e.target.value);
-                    }}
-                    value={query}
-                  />
-                  <Button
-                    type="submit"
-                    variant="transparant"
-                    style={{
-                      background: "#A06ECE",
-                      color: "white",
-                      borderRadius: "0 8px 8px 0px",
-                    }}
-                  >
-                    <SearchOutlinedIcon />
-                  </Button>
-                </Form.Group>
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div className="d-flex justify-content-between">
-                <p>Pencarian Terkini</p>
-                <p style={{ color: "red" }}>hapus</p>
-              </div>
-              <div>
-                <p>{query}</p>
-              </div>
-            </Modal.Body>
-          </Modal>
-
-          {/* modal date picker */}
-          <Modal
-            size="md"
-            show={datepicker}
-            onHide={() => setDatepicker(false)}
-            centered
-            aria-labelledby="example-modal-sizes-title-sm"
-          >
-            <Modal.Header closeButton></Modal.Header>
-            <Modal.Body>
-              <DatePickerRanger />
-            </Modal.Body>
-          </Modal>
         </Row>
       </Container>
 
@@ -233,8 +67,11 @@ const History = () => {
           <Container>
             <Row>
               {historys &&
-                historys.map((history) => (
-                  <Row className=" d-flex justify-content-center  mb-5 ">
+                historys.map((history, index) => (
+                  <Row
+                    className=" d-flex justify-content-center  mb-5 "
+                    key={index}
+                  >
                     <Col lg={5} className=" d-flex justify-content-center">
                       <Row>
                         <Col
@@ -269,7 +106,6 @@ const History = () => {
                                   }
                                 </p>
                                 <p style={{ width: "5rem" }}>
-                                  {" "}
                                   {
                                     history.tickets[0].seat.schedule
                                       .departureTime
@@ -388,17 +224,23 @@ const History = () => {
                                 {history.tickets[0].seat.schedule.airline.name}
                               </p>
 
-                              <p style={{ fontWeight: "700" }}>informasi :</p>
-                              <p className="pb-1" style={{ width: "18rem" }}>
-                                penumpang 1: {history.tickets[0].title}{" "}
-                                {history.tickets[0].firstName}{" "}
-                                {history.tickets[0].lastName}
-                                <p>
-                                  {" "}
-                                  <strong>ID:</strong>
-                                  {history.tickets[0].idCardNumber}
-                                </p>
-                              </p>
+                              <p style={{ fontWeight: "700" }}>Informasi :</p>
+                              <div></div>
+                              {history.tickets.map((ticket, index) => (
+                                <div className="pb-1" key={index}>
+                                  <p style={{ width: "8rem" }}>
+                                    {" "}
+                                    Penumpang {index + 1}: {ticket.title}
+                                    {" " + ticket.firstName}
+                                    {" " + ticket.lastName}
+                                  </p>
+                                  <p>
+                                    {" "}
+                                    <strong>ID:</strong>
+                                    {" " + ticket.idCardNumber}
+                                  </p>
+                                </div>
+                              ))}
                             </div>
                           </div>
                         </div>
@@ -438,7 +280,7 @@ const History = () => {
                             </div>
                             <div className="d-flex justify-content-between">
                               <p>Tax</p>
-                              <p>IDR </p>
+                              <p>IDR 0</p>
                             </div>
                             <div className="d-flex justify-content-between">
                               <p style={{ fontWeight: "700" }}>Total</p>
@@ -622,12 +464,18 @@ const History = () => {
                                   </p>
                                   <div className="Isi3 pt-1">
                                     <p>
-                                      <strong></strong>
+                                      <strong>
+                                        {
+                                          history.tickets[0].seat.schedule
+                                            .departureTime
+                                        }
+                                      </strong>
                                     </p>
                                     <p
                                       style={{
                                         fontWeight: "700",
                                         color: "#A06ECE",
+                                        fontSize: "12px",
                                       }}
                                     >
                                       Keberangkatan
@@ -668,21 +516,23 @@ const History = () => {
                                       </p>
 
                                       <p style={{ fontWeight: "700" }}>
-                                        informasi :
+                                        Informasi :
                                       </p>
-                                      <p
-                                        className="pb-1"
-                                        style={{ width: "8rem" }}
-                                      >
-                                        penumpang 1: {history.tickets[0].title}{" "}
-                                        {history.tickets[0].firstName}{" "}
-                                        {history.tickets[0].lastName}
-                                        <p>
-                                          {" "}
-                                          <strong>ID:</strong>
-                                          {history.tickets[0].idCardNumber}
-                                        </p>
-                                      </p>
+                                      {history.tickets.map((ticket, index) => (
+                                        <div className="pb-1" key={index}>
+                                          <p style={{ width: "8rem" }}>
+                                            Penumpang {index + 1}:{" "}
+                                            {ticket.title}
+                                            {" " + ticket.firstName}
+                                            {" " + ticket.lastName}
+                                          </p>
+                                          <p>
+                                            {" "}
+                                            <strong>ID:</strong>
+                                            {" " + ticket.idCardNumber}
+                                          </p>
+                                        </div>
+                                      ))}
                                     </div>
                                   </div>
                                 </div>
@@ -694,13 +544,19 @@ const History = () => {
                                 >
                                   <div className="Isi2">
                                     <p>
-                                      <strong></strong>
+                                      <strong>
+                                        {
+                                          history.tickets[0].seat.schedule
+                                            .arrivalTime
+                                        }
+                                      </strong>
                                     </p>
 
                                     <p
                                       style={{
                                         fontWeight: "700",
                                         color: "#A06ECE",
+                                        fontSize: "12px",
                                       }}
                                     >
                                       Kedatangan

@@ -39,7 +39,8 @@ const BiodataForm = () => {
 
   const [index, setIndex] = useState(0);
 
-  const { dataPenumpang } = useSelector((state) => state.booking);
+  const { dataPenumpang, penumpang } = useSelector((state) => state.booking);
+  const { userId } = useSelector((state) => state.auth);
 
   const onPemesan = (e) => {
     e.preventDefault();
@@ -77,12 +78,13 @@ const BiodataForm = () => {
         nationality,
         idCardNumber,
         scheduleId: 2,
+        userId,
       };
       dispatch(setDataPenumpang([...dataPenumpang, data]));
       toast.success(`Data Penumpang ${index + 1} berhasil tersimpan!`);
       setIndex(index + 1);
 
-      if (index === user.length - 1) {
+      if (index === penumpang - 1) {
         navigate("/booking/checkout");
       } else {
         setCheckedPenumpang(false);
@@ -97,9 +99,6 @@ const BiodataForm = () => {
       }
     }
   };
-
-  //data dummy penumpang
-  const user = ["Dewasa", "Anak"];
 
   return (
     <>
@@ -172,9 +171,7 @@ const BiodataForm = () => {
           <div className="booking__biodata__form__penumpang">
             <h2>Isi Data Penumpang</h2>
             <form className="booking__biodata__form__penumpang__input">
-              <p className="judul">
-                Data Diri Penumpang {index + 1} - {user[index]}
-              </p>
+              <p className="judul">Data Diri Penumpang {index + 1}</p>
               <div className="list">
                 <div className="list__title">
                   <p>Title</p>
