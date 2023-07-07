@@ -1,3 +1,4 @@
+
 import {
   BrowserRouter,
   Outlet,
@@ -130,6 +131,27 @@ function App() {
     //   </BrowserRouter>
 
     <Provider store={store}>
+//     <BrowserRouter>
+//       <Navbar />
+//       <ToastContainer theme="colored"/>
+//       <Routes>
+//         <Route path='/login' element={<Login/>} />
+//         <Route path='/register' element={<Register/>} />
+        
+//         <Route path='/' element={<Homepage/>} />
+//         <Route path='/search' element={<Search/>} />
+//         <Route path='/booking/pemesan' element={<Booking/>} />
+//         <Route path='/booking/penumpang' element={<Booking/>} />
+//         <Route path='/booking/checkout' element={<Booking/>} />
+//         <Route path='/booking/payment' element={<Booking/>} />
+//         <Route path='/booking/success' element={<Booking/>} />
+//         <Route path='/history' element={<History/>} />
+//         <Route path="/notifikasi" element={<Notifikasi />} />
+//         <Route path="/profile" element={<Profile />} />
+//       </Routes>
+//     </BrowserRouter>
+//     </Provider>
+
       <BrowserRouter>
         <Navbar />
         <ToastContainer theme="colored" />

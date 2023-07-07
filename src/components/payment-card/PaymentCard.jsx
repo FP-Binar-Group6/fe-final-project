@@ -2,29 +2,51 @@ import React, { useState } from "react";
 import "./paymentCard.css";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
-import TripOriginIcon from "@mui/icons-material/TripOrigin";
-import gopay from "../../assets/Logo GoPay (PNG-240p) - FileVector69.png";
-import { Checkbox } from "@mui/material";
-import bca from "../../assets/BCA Mobile App Logo PNG Vector (EPS) Free Download.png";
-import mandiri from "../../assets/lambang livin by mandiri.png";
-import bri from "../../assets/Logo_baru_BRImo.png";
-import mastercard from "../../assets/mastercard logo.png";
-import visa from "../../assets/visa logo.png";
-import amex from "../../assets/amex logo.png";
-import paypal from "../../assets/paypal logo.png";
+import gopay from "../../assets/booking-image/Logo GoPay (PNG-240p) - FileVector69.png";
+import bca from "../../assets/booking-image/BCA Mobile App Logo PNG Vector (EPS) Free Download.png";
+import mandiri from "../../assets/booking-image/lambang livin by mandiri.png";
+import bri from "../../assets/booking-image/Logo_baru_BRImo.png";
+import mastercard from "../../assets/booking-image/mastercard logo.png";
+import visa from "../../assets/booking-image/visa logo.png";
+import amex from "../../assets/booking-image/amex logo.png";
+import paypal from "../../assets/booking-image/paypal logo.png";
+import { useDispatch } from "react-redux";
+import { setPaymentId } from "../../redux/reducers/booking";
 
 const PaymentCard = () => {
   const [isGopay, setIsGopay] = useState(false);
   const [isVirtual, setIsVirtual] = useState(false);
   const [isCredit, setIsCredit] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const onGopay = () => {
+    setIsGopay(!isGopay);
+    setIsVirtual(false);
+    setIsCredit(false);
+    dispatch(setPaymentId("1"));
+  };
+
+  const onVirtualAccount = () => {
+    setIsVirtual(!isVirtual);
+    setIsGopay(false);
+    setIsCredit(false);
+    dispatch(setPaymentId("2"));
+  };
+
+  const onCreditCard = () => {
+    setIsCredit(!isCredit);
+    setIsGopay(false);
+    setIsVirtual(false);
+    dispatch(setPaymentId("3"));
+  };
+
   return (
     <div className="payment">
       <h2>Isi Data Pembayaran</h2>
       <div className="list__pembayaran">
         {/* gopay */}
-        <div className="gopay" onClick={() => setIsGopay(!isGopay)}>
+        <div className="gopay" onClick={onGopay}>
           <p>Gopay</p>
           {isGopay ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </div>
@@ -33,14 +55,11 @@ const PaymentCard = () => {
           style={{ display: isGopay ? "block" : "none" }}
         >
           <img src={gopay} alt="" />
-          <p>Kamu akan diarahkan ke GoPay untuk menyelesaikan pembelian.</p>
+          <p>Anda akan diarahkan ke GoPay untuk menyelesaikan pembelian.</p>
         </div>
 
         {/* virtual account */}
-        <div
-          className="virtual__account"
-          onClick={() => setIsVirtual(!isVirtual)}
-        >
+        <div className="virtual__account" onClick={onVirtualAccount}>
           <p>Virtual Account</p>
           {isVirtual ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </div>
@@ -48,34 +67,19 @@ const PaymentCard = () => {
           className="virtual__account__detail"
           style={{ display: isVirtual ? "block" : "none" }}
         >
-          <div className="bca">
-            <Checkbox
-              icon={<CircleOutlinedIcon />}
-              checkedIcon={<TripOriginIcon sx={{ color: "#4B1979" }} />}
-            />
+          <div className="virtual__account__logo">
             <img src={bca} alt="" />
-            <p>BCA Mobile Banking</p>
-          </div>
-          <div className="mandiri">
-            <Checkbox
-              icon={<CircleOutlinedIcon />}
-              checkedIcon={<TripOriginIcon sx={{ color: "#4B1979" }} />}
-            />
             <img src={mandiri} alt="" />
-            <p>Livin' by Mandiri</p>
-          </div>
-          <div className="bri">
-            <Checkbox
-              icon={<CircleOutlinedIcon />}
-              checkedIcon={<TripOriginIcon sx={{ color: "#4B1979" }} />}
-            />
             <img src={bri} alt="" />
-            <p>BRImo</p>
           </div>
+          <p>
+            Anda dapat membayar melalui BCA mBanking, Livin' by Mandiri, atau
+            BRImo
+          </p>
         </div>
 
         {/* credit card */}
-        <div className="credit__card" onClick={() => setIsCredit(!isCredit)}>
+        <div className="credit__card" onClick={onCreditCard}>
           <p>Credit Card</p>
           {isCredit ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         </div>

@@ -5,15 +5,31 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import BiodataForm from "../../components/biodata-form/BiodataForm";
 import DetailCard from "../../components/detail-card/DetailCard";
 import PaymentCard from "../../components/payment-card/PaymentCard";
-import pic from "../../assets/🦆 illustration _Cart shopping list_.png";
+import pic from "../../assets/booking-image/🦆 illustration _Cart shopping list_.png";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { payment, saveDataPenumpang } from "../../redux/actions/booking";
+import BiodataCard from "../../components/biodataCard/BiodataCard";
+import { toast } from "react-toastify";
 
 const Booking = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
   const isCheckout = location.pathname === "/booking/checkout";
   const isPayment = location.pathname === "/booking/payment";
   const isSuccess = location.pathname === "/booking/success";
+
+  const { dataPenumpang, bookingCode, paymentId } = useSelector(
+    (state) => state.booking
+  );
+
+  const onPayment = () => {
+    if (paymentId === "") {
+      toast.error("Pilih metode pembayaran terlebih dahulu!");
+    }
+    dispatch(payment(navigate));
+  };
 
   return (
     <div className="booking">
@@ -30,53 +46,35 @@ const Booking = () => {
         <NavigateNextIcon color="disabled" />
         <h2 style={{ color: isSuccess ? "#000000" : "#8A8A8A" }}>Selesai</h2>
       </div>
-      <div
-        className="booking__notif"
-        style={{
-          background: "red",
-          display: !isCheckout && !isPayment && !isSuccess ? "block" : "none",
-        }}
-      >
-        <p>Selesaikan dalam 00:00:00</p>
-      </div>
-      <div
-        className="booking__notif"
-        style={{ background: "red", display: !!isPayment ? "block" : "none" }}
-      >
-        <p>Selesaikan Pembayaran sampai 10 Maret 2023 12:00</p>
-      </div>
-      <div
-        className="booking__notif"
-        style={{
-          background: "#73CA5C",
-          display: !!isCheckout ? "block" : "none",
-        }}
-      >
-        <p>Data Anda berhasil tersimpan!</p>
-      </div>
-      <div
-        className="booking__notif"
-        style={{
-          background: "#73CA5C",
-          display: !!isSuccess ? "block" : "none",
-        }}
-      >
-        <p>Terima kasih atas pembayaran transaksi</p>
-      </div>
 
       <div className="booking__biodata">
         {/* slicing untuk pengisian data diri */}
-        {!isPayment && !isSuccess && (
+        {!isCheckout && !isPayment && !isSuccess && (
           <>
             <div>
-              <BiodataForm isCheckout={isCheckout} />
+              <BiodataForm />
+            </div>
+            <div className="booking__biodata__detail">
+              <h3>Detail Penerbangan</h3>
+              <DetailCard />
+            </div>
+          </>
+        )}
+
+        {/* slicing untuk verifikasi data penumpang */}
+        {!!isCheckout && (
+          <>
+            <div>
+              <BiodataCard />
             </div>
             <div className="booking__biodata__detail">
               <h3>Detail Penerbangan</h3>
               <DetailCard />
               <button
                 style={{ display: isCheckout ? "block" : "none" }}
-                onClick={() => navigate("/booking/payment")}
+                onClick={() =>
+                  dispatch(saveDataPenumpang(dataPenumpang, navigate))
+                }
               >
                 Lanjut Bayar
               </button>
@@ -89,16 +87,13 @@ const Booking = () => {
           <>
             <div className="data__pembayaran">
               <PaymentCard />
-              <button
-                className="btn__save"
-                onClick={() => navigate("/booking/success")}
-              >
+              <button className="btn__save" onClick={onPayment}>
                 Bayar
               </button>
             </div>
             <div className="booking__code">
               <div className="booking__code__judul">
-                <h3>Booking Code:</h3> <span>6723y2GHK</span>
+                <h3>Booking Code:</h3> <span>{bookingCode}</span>
               </div>
               <DetailCard />
             </div>

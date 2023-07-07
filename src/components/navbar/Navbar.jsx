@@ -1,6 +1,6 @@
 import "./navbar.css";
 
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import logo from "../../assets/logo.png";
 import LoginIcon from "@mui/icons-material/Login";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
@@ -10,7 +10,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProfile, logout } from "../../redux/actions/auth";
-
 
 const Navbar = () => {
   const dispatch = useDispatch();

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 import './register.css'
 import auth from '../../assets/auth.jpg'
@@ -23,6 +24,7 @@ const Register = () => {
     e.preventDefault();
 
     const data = { email, password, name, phoneNumber };
+
     if (email==="") {
       toast.error("Email is required")
     } if (password===""){
@@ -38,9 +40,9 @@ const Register = () => {
   };
 
   return (
-    <div className='register'>
-      <img src={auth} className='bg-register' />
-      <div className='register-form'>
+    <div className="register">
+      <img src={auth} className="bg-register" alt="" />
+      <div className="register-form">
         <h2>Daftar</h2>
         <form onSubmit={onSubmit}>
           <p>nama</p>
@@ -80,14 +82,13 @@ const Register = () => {
 
           <button className='btn-register'>Masuk</button>
         </form>
-        <div className='regist-account'>
-          <p>Sudah punya akun?
-          </p>
-          <a href={'login'}>Masuk di sini</a>
+        <div className="regist-account">
+          <p>Sudah punya akun?</p>
+          <a href={"login"}>Masuk di sini</a>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
