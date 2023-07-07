@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./resultItem.css";
-import {
-  KeyboardArrowDown,
-  Luggage,
-  AirplanemodeActive,
-} from "@mui/icons-material";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllSchedule } from "../../redux/actions/search";
-
-import pencarianNull from "../../assets/images/pencariannull.png";
+import { KeyboardArrowDown, Luggage } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 const ResultItem = ({ data }) => {
@@ -19,7 +11,6 @@ const ResultItem = ({ data }) => {
   const [month2, setMonth2] = useState("");
 
   const [duration, setDuration] = useState(0);
-  const [fullHour, setFullHour] = useState("");
 
   const [dateTimeInt, setDateTimeInt] = useState(0);
   const [dateTimeInt2, setDateTimeInt2] = useState(0);
@@ -38,8 +29,6 @@ const ResultItem = ({ data }) => {
 
   const dateHour = dateTime[0] + ":" + dateTime[1];
   const dateHour2 = dateTime2[0] + ":" + dateTime2[1];
-
-  console.log(dipilih);
 
   const pilihSchedule = () => {
     navigate("/booking/pemesan");

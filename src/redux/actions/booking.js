@@ -1,6 +1,5 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-
 import { setBookingCode, setDataPemesan, setDataPenumpang, setPaymentId, setScheduleId } from "../reducers/booking";
 
 export const saveDataPenumpang = (dataPenumpang, navigate) => async (dispatch, getState) => {
@@ -43,11 +42,10 @@ export const saveDataPemesan = (pemesan, navigate)=> async (dispatch) => {
 
 export const payment = (navigate)=> async (dispatch, getState) => {
   try {
-    const { userId, token } = getState().auth;
+    const { token } = getState().auth;
     const { paymentId, bookingCode } = getState().booking;
 
     let data = JSON.stringify({
-      "userId": `${userId}`,
       "paymentMethodId": `${paymentId}`
     });
     
