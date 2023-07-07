@@ -9,7 +9,6 @@ import DestinationCards from "../../components/destinationCards/DestinationCards
 import SearchFlight from "../../components/searchFlight/SearchFlight";
 
 const Homepage = () => {
-
   return (
     <div className="homepage__container">
       <div className="banner">
@@ -19,8 +18,7 @@ const Homepage = () => {
         <SearchFlight />
       </div>
       <div className="destinationCardWrapper">
-
-      <DestinationCards />
+        <DestinationCards />
       </div>
     </div>
   );

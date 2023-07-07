@@ -1,5 +1,11 @@
-
-import { BrowserRouter, Outlet, Route, RouterProvider, Routes, createBrowserRouter } from "react-router-dom";
+import {
+  BrowserRouter,
+  Outlet,
+  Route,
+  RouterProvider,
+  Routes,
+  createBrowserRouter,
+} from "react-router-dom";
 import "./App.css";
 
 import Homepage from "./pages/homepage/Homepage";
@@ -17,7 +23,6 @@ import "react-toastify/dist/ReactToastify.css";
 import store from "./redux/store";
 
 function App() {
-
   // const Layout = () => {
   //   return (
   //     <>
@@ -86,44 +91,43 @@ function App() {
     //   <RouterProvider router={router}/>
     // </div>
 
-
-  // return (
-  //   <BrowserRouter>
-  //     <Navbar />
-  //     <Routes>
-  //       <Route path='/login' element={<Login/>} />
-  //       <Route path='/register' element={<Register/>} />
-  //       <Route path='/' element={<Homepage/>} />
-  //       <Route path='/search' element={<Search/>} />
-  //       <Route path='/booking' element={<Booking/>} />
-  //       <Route path='/booking/checkout' element={<Booking/>} />
-  //       <Route path='/booking/payment' element={<Booking/>} />
-  //       <Route path='/booking/success' element={<Booking/>} />
-  //       <Route path='/history' element={<History/>} />
-  //       <Route path="/notifikasi" element={<Notifikasi />} />
-  //     </Routes>
-  //   </BrowserRouter>
+    // return (
+    //   <BrowserRouter>
+    //     <Navbar />
+    //     <Routes>
+    //       <Route path='/login' element={<Login/>} />
+    //       <Route path='/register' element={<Register/>} />
+    //       <Route path='/' element={<Homepage/>} />
+    //       <Route path='/search' element={<Search/>} />
+    //       <Route path='/booking' element={<Booking/>} />
+    //       <Route path='/booking/checkout' element={<Booking/>} />
+    //       <Route path='/booking/payment' element={<Booking/>} />
+    //       <Route path='/booking/success' element={<Booking/>} />
+    //       <Route path='/history' element={<History/>} />
+    //       <Route path="/notifikasi" element={<Notifikasi />} />
+    //     </Routes>
+    //   </BrowserRouter>
 
     <Provider store={store}>
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path='/login' element={<Login/>} />
-        <Route path='/register' element={<Register/>} />
-        
-        <Route path='/' element={<Homepage/>} />
-        <Route path='/search' element={<Search/>} />
-        <Route path='/booking' element={<Booking/>} />
-        <Route path='/booking/checkout' element={<Booking/>} />
-        <Route path='/booking/payment' element={<Booking/>} />
-        <Route path='/booking/success' element={<Booking/>} />
-        <Route path='/history' element={<History/>} />
-        <Route path="/notifikasi" element={<Notifikasi />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-    </BrowserRouter>
-    </Provider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
+          <Route path="/" element={<Homepage />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/booking/pemesan" element={<Booking />} />
+          <Route path="/booking/penumpang" element={<Booking />} />
+          <Route path="/booking/checkout" element={<Booking />} />
+          <Route path="/booking/payment" element={<Booking />} />
+          <Route path="/booking/success" element={<Booking />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/notifikasi" element={<Notifikasi />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

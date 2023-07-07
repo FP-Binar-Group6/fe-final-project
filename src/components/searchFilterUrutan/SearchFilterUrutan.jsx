@@ -2,10 +2,13 @@ import React from 'react'
 import './searchFilterUrutan.css'
 import { Close } from '@mui/icons-material'
 
+
+
 const SearchFilterUrutan = () => {
+
   return (
     <div className="searchFilterUrutanItemModal">
-        <div className="searchFilterUrutanCloseBtn">
+        <div className="searchFilterUrutanCloseBtn" >
         <Close/> 
         </div>
         <div className="searchFilterUrutanItemModalContainer">
