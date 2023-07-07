@@ -18,6 +18,7 @@ import { getAllSchedule } from "../../redux/actions/search";
 import { Navigate } from "react-router-dom";
 import { set } from "date-fns";
 
+
 const Search = () => {
   const dispatch = useDispatch();
 
@@ -68,7 +69,6 @@ const Search = () => {
       date: "02/03/2002",
     },
   ];
-
   const sliceMethod = () => {
     setSliceNext(sliceNext + 3);
   };
