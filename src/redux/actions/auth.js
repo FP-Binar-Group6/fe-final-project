@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 
 export const login = (data, navigate) => async (dispatch) => {
   try {
- 
 
     const response = await axios.post(
       `https://be-airticket-a6bnbhk5xa-as.a.run.app/api/auth/login`,
@@ -12,13 +11,14 @@ export const login = (data, navigate) => async (dispatch) => {
       { "Content-Type": "application/json" } 
     );
 
-    const { token } = response?.data; 
+    const token = response?.data?.token;
 
     dispatch(setToken(token));
     dispatch(setIsLoggedIn(true));
-    console.log(token)
+
     toast.success("Log in succes");
     navigate("/");
+    
   } catch (error) {
     if (axios.isAxiosError(error)) {
       toast.error(error?.response?.data?.message|| error?.message);
@@ -36,7 +36,7 @@ export const register = (data, navigate) => async (dispatch) => {
       { "Content-Type": "application/json" }
     );  
 
-    const { token } = response?.data;
+    const token = response?.data?.token;
 
     dispatch(setToken(token));
     dispatch(setIsLoggedIn(true));

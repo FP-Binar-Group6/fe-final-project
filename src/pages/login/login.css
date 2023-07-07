@@ -22,6 +22,7 @@
 }
 
 .login-form .h2 {
+  font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -55,11 +56,6 @@
     position: relative;
 }
 
-.password-input input {
-    padding-right: 40px;
-    padding : 10px 40px 10px 10px;
-    /* Menyesuaikan ruang untuk ikon visibility */
-}
 
 .password-input .password-icon {
     position: absolute;
@@ -86,6 +82,7 @@
     width: 452px;
     height: 48px;
     border-radius: 16px;
+    padding: 0 40px 0 30px;
 }
 
 .btn-signin {
