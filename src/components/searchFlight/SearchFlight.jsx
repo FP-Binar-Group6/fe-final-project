@@ -19,13 +19,16 @@ import { DateRangeCalendar } from "@mui/x-date-pickers-pro/DateRangeCalendar";
 
 import { format } from "date-fns";
 import { Calendar } from "react-date-range";
-import 'react-date-range/dist/styles.css'
-import 'react-date-range/dist/theme/default.css'
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllAirport, getAllClass } from "../../redux/actions/home";
 
-import { getAllAirport, getPostAirport } from "../../redux/actions/home";
+// import { getPostAirport } from "../../redux/actions/post";
 import { FlightLand } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { setSchedule, setSearch } from "../../redux/reducers/search";
+import { getSearchSchedule } from "../../redux/actions/search";
 
 const SearchFlight = () => {
   const [showSwitch, setshowSwitch] = useState(false);
@@ -39,44 +42,9 @@ const SearchFlight = () => {
   const [calenderReturn, setCalenderReturn] = useState("");
   const [filterNameTo, setFilterNameTo] = useState("");
   const [filterNameFrom, setFilterNameFrom] = useState("");
-  const [destinationItem, setDestinationItem] = useState("")
-  
-  const airport = useSelector((state)=>state.home.airport);
-  const [kotakeberangkatan, setKotakeberangkatan] = useState("Jakarta");
-  const [destinationItemTo, setDestinationItemTo] = useState("Surabaya");
-  const data = [{
-    "airportId": 1,
-    "name": "Soekarno-Hatta International Airport",
-    "code": "CGK",
-    "cityName": "Jakarta"
-},
-{
-    "airportId": 2,
-    "name": "Ngurah Rai International Airport",
-    "code": "DPS",
-    "cityName": "Denpasar"
-},
-{
-    "airportId": 3,
-    "name": "Juanda International Airport",
-    "code": "SUB",
-    "cityName": "Surabaya"
-},
-{
-    "airportId": 4,
-    "name": "Husein Sastranegara International Airport",
-    "code": "BDO",
-    "cityName": "Bandung"
-},]
+  const [destinationFrom, setDestinationFrom] = useState("");
+  const [destinationTo, setDestinationTo] = useState("");
 
-  console.log("airport", airport)
-  console.log("data", data)
-  
-  useEffect(() => {
-
-    
-  dispatch(getAllAirport())
-  }, []);
 
   const [seatClass, setSeatClass] = useState("");
   const [passenger, setPassenger] = useState({
@@ -85,6 +53,69 @@ const SearchFlight = () => {
     baby: 0,
   });
 
+  const [departureAirportId, setDepartureId] = useState();
+  const [arrivalAirportId, setArrivalId] = useState();
+  const [departureTime, setDepartureTime] = useState();
+  const [className, setClassName] = useState("");
+
+  // handle redux
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const airport = useSelector((state) => state.home.airport);
+  const classes = useSelector((state) => state.home.class);
+  const search = useSelector((state) => state.search.filter);
+
+  const submitHandle = () => {
+    if (
+      departureTime == undefined &&
+      departureAirportId == undefined &&
+      arrivalAirportId == null
+    ) {
+      alert("Please fill up the form");
+    } else {
+      const data = {
+        departureTime,
+        departureAirportId,
+        arrivalAirportId,
+        className,
+      };
+      console.log(data, "ini data input");
+
+      console.log(data);
+      dispatch(
+        getSearchSchedule(
+          departureTime,
+          departureAirportId,
+          arrivalAirportId,
+          className,
+          navigate
+        )
+      );
+    }
+  };
+
+  useEffect(() => {
+    // dispatch(
+    //   getSearchSchedule(
+    //     departureTime,
+    //     departureAirportId,
+    //     arrivalAirportId,
+    //     className,
+    //     navigate
+    //   )
+    // );
+    dispatch(getAllAirport());
+    dispatch(getAllClass());
+  }, [
+    dispatch,
+    // departureTime,
+    // departureAirportId,
+    // arrivalAirportId,
+    // className,
+    // navigate,
+  ]);
   const handleOption = (name, operation) => {
     setPassenger((prev) => {
       return {
@@ -94,24 +125,21 @@ const SearchFlight = () => {
       };
     });
   };
-  
 
   const submitPassenger = (e) => {
     e.preventDefault();
-    setopenPassenger(false)
-  }
+    setopenPassenger(false);
+  };
 
-  const handleCalenderDeparture = (date) =>{
-    console.log(date);
-    setCalenderDeparture(format(date, "MM/dd/yyyy"))
-  }
-  const handleCalenderReturn = (date) =>{
-    console.log(date);
-    setCalenderReturn(format(date, "MM/dd/yyyy"))
-  }
-
-  // dispatch -> to change the global state in redux
-  const dispatch = useDispatch();
+  const handleCalenderDeparture = (date) => {
+    setDepartureTime(format(date, "yyyy/MM/dd").toString());
+    setCalenderDeparture(format(date, "MM/dd/yyyy").toString());
+    setopenDateDeparture(!openDateDeparture);
+  };
+  const handleCalenderReturn = (date) => {
+    setCalenderReturn(format(date, "MM/dd/yyyy"));
+    setopenDateReturn(!openDateReturn);
+  };
 
   return (
     <>
@@ -128,14 +156,19 @@ const SearchFlight = () => {
               className="destination__from__to_input"
               onClick={() => setopenDestinationFrom(!openDestinationFrom)}
             >
-               {kotakeberangkatan}
+              {destinationFrom}
             </span>
             {openDestinationFrom && (
               <div className="destination_options">
                 <div className="search_field_area">
                   <div className="search_field">
                     <SearchIcon style={{ color: "#D0D0D0" }} />
-                    <input placeholder="Masukkan Kota atau Negara"  type="text" value={filterNameFrom} onChange={(e)=>setFilterNameFrom(e.target.value)}/>
+                    <input
+                      placeholder="Masukkan Kota atau Negara"
+                      type="text"
+                      value={departureAirportId}
+                      onChange={(e) => setFilterNameFrom(e.target.value)}
+                    />
                   </div>
                   <CloseIcon onClick={() => setopenDestinationFrom(false)} />
                 </div>
@@ -143,43 +176,33 @@ const SearchFlight = () => {
                   <p>Pencarian Terkini</p>
                   <span>Hapus</span>
                 </div>
-
-                {
-                  airport.map((kota)=>{
-                    
-                    return(
-                      <>
-                      <div onClick ={()=>setKotakeberangkatan(kota.cityName)} className="latestSeachItem">
-                      <label>{kota.cityName}</label>
+                {airport?.length > 0 &&
+                  airport.map((e, i) => (
+                    <div
+                      className="latestSeachItem"
+                      key={i}
+                      onClick={() => {
+                        setDestinationFrom(e?.code);
+                        setDepartureId(e?.airportId);
+                        setopenDestinationFrom(!openDestinationFrom);
+                      }}
+                    >
+                      <p>{e?.cityName}</p>
                       <CloseIcon style={{ color: "#8A8A8A" }} />
                     </div>
-                    <hr />
-                      </>
-                  )
-                  })
-                }
-                {/* {posts?.length > 0 &&
-                  posts.map((post) => (
-                <div className="latestSeachItem" onClick={(e)=>setDestinationItem("Jakarta")}>
-                  <label>{post?.cityName}</label>
-                  <CloseIcon style={{ color: "#8A8A8A" }} />
-                </div>
-                  ))
-                } */}
-                {/* {getPostAirport.cityName.filter((airport)=>airport.cityName === filterNameFrom) &&
-                  <div className="latestSeachItem" onClick={(e)=>setDestinationItem("Jakarta")}>
-                  <label>Jakarta</label>
-                  <CloseIcon style={{ color: "#8A8A8A" }} />
-                </div>
-                } */}
-                <hr />
+                  ))}
               </div>
-              
             )}
           </div>
 
           <div className="swap__destination">
-            <SwapHorizIcon />
+            <SwapHorizIcon
+              onClick={() => {
+                setDestinationFrom(destinationTo);
+                setDestinationTo(destinationFrom);
+              }}
+            />
+            {/* <SwapHorizIcon /> */}
           </div>
 
           <div className="destination__from__to">
@@ -189,14 +212,19 @@ const SearchFlight = () => {
               className="destination__from__to_input"
               onClick={() => setopenDestinationTo(!openDestinationTo)}
             >
-              {destinationItemTo}
+              {destinationTo}
             </span>
             {openDestinationTo && (
               <div className="destination_options">
                 <div className="search_field_area">
                   <div className="search_field">
                     <SearchIcon style={{ color: "D0D0D0" }} />
-                    <input placeholder="Masukkan Kota atau Negara" type="text" value={filterNameTo} onChange={(e)=>setFilterNameTo(e.target.value)}/>
+                    <input
+                      placeholder="Masukkan Kota atau Negara"
+                      type="text"
+                      value={arrivalAirportId}
+                      onChange={(e) => setFilterNameTo(e.target.value)}
+                    />
                   </div>
                   <CloseIcon onClick={() => setopenDestinationTo(false)} />
                 </div>
@@ -204,26 +232,20 @@ const SearchFlight = () => {
                   <p>Pencarian Terkini</p>
                   <span>Hapus</span>
                 </div>
-
-                {
-                  airport.map((kota)=>{
-                    
-                    return(
-                      <>
-                      <div onClick ={()=>setDestinationItemTo(kota.cityName)} className="latestSeachItem">
-                      <label>{kota.cityName}</label>
+                {airport?.length > 0 &&
+                  airport.map((e) => (
+                    <div
+                      className="latestSeachItem"
+                      onClick={() => {
+                        setDestinationTo(e?.code);
+                        setArrivalId(e?.airportId);
+                        setopenDestinationTo(!openDestinationTo);
+                      }}
+                    >
+                      <p>{e?.cityName}</p>
                       <CloseIcon style={{ color: "#8A8A8A" }} />
                     </div>
-                    <hr />
-                      </>
-                  )
-                  })
-                }
-                <div className="latestSeachItem" onClick={(e)=>setDestinationItemTo("Jakarta")}>
-                  <label>Jakarta</label>
-                  <CloseIcon style={{ color: "#8A8A8A" }} />
-                </div>
-                <hr />
+                  ))}
               </div>
             )}
           </div>
@@ -243,13 +265,20 @@ const SearchFlight = () => {
                 {calenderDeparture}
               </span>
               {openDateDeparture && (
-                  <div
-                    components={["DateRangeCalendar"]}
-                    className="date_options"
-                  >
-                  <Calendar onChange={handleCalenderDeparture} date={new Date()} className="CalendarElement" color="#7126B5" />
-                    {/* <DateRangeCalendar onChange={handleCalender} date = {new Date()}/> */}
-                  </div>
+                <div
+                  components={["DateRangeCalendar"]}
+                  className="date_options"
+                >
+                  <Calendar
+                    onChange={handleCalenderDeparture}
+                    date={new Date()}
+                    minDate={new Date()}
+                    className="CalendarElement"
+                    color="#7126B5"
+                    disabledDays={{ before: new Date() }}
+                  />
+                  {/* <DateRangeCalendar onChange={handleCalender} date = {new Date()}/> */}
+                </div>
               )}
             </div>
             {showSwitch ? (
@@ -262,31 +291,37 @@ const SearchFlight = () => {
                 >
                   {calenderReturn}
                 </span>
-              {openDateReturn && (
+                {openDateReturn && (
                   <div
                     components={["DateRangeCalendar"]}
                     className="date_options"
                   >
-                  <Calendar onChange={handleCalenderReturn} className="CalendarElement" date={new Date()} color="#7126B5" disabledDays={{ before: new Date() }}/>
+                    <Calendar
+                      onChange={handleCalenderReturn}
+                      className="CalendarElement"
+                      date={new Date(calenderDeparture)}
+                      minDate={new Date(calenderDeparture)}
+                      color="#7126B5"
+                      disabledDays={{ before: new Date(calenderDeparture) }}
+                    />
                     {/* <DateRangeCalendar onChange={handleCalender} date = {new Date()}/> */}
                   </div>
-              )}
+                )}
               </div>
-            ) : <div className="returnNotOpen">
-              </div>}
-
+            ) : (
+              <div className="returnNotOpen"></div>
+            )}
           </div>
 
-            <div className="form-check form-switch">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                role="switch"
-                id="flexSwitchCheckDefault"
-                onClick={() => setshowSwitch(!showSwitch)}
-              />
-            </div>
-          
+          <div className="form-check form-switch">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+              onClick={() => setshowSwitch(!showSwitch)}
+            />
+          </div>
 
           <div className="passenger_container">
             <AirlineSeatReclineNormalIcon className="icon" />
@@ -297,9 +332,7 @@ const SearchFlight = () => {
                 className="passenger_input"
                 onClick={() => setopenPassenger(!openPassenger)}
               >
-                {`${
-                  passenger.adult + passenger.children
-                } Penumpang`}
+                {`${passenger.adult + passenger.children} Penumpang`}
               </span>
 
               {openPassenger && (
@@ -405,66 +438,51 @@ const SearchFlight = () => {
                 className="seat_class_input"
                 onClick={() => setopenSeatClass(!openSeatClass)}
               >
-                {`${seatClass}`}
+                {seatClass}
               </span>
 
               {openSeatClass && (
                 <div className="seatClass_options">
-                  <CloseIcon onClick={() => setopenSeatClass(false)} />
+                  <CloseIcon onClick={() => setopenSeatClass(!openSeatClass)} />
                   <hr />
-                  <div className="seat_optionItem">
-                    <div className="seat_option_text" onClick={()=>setSeatClass("Economy")}>
-                      <label>Economy</label>
-                      <p>IDR 4.950.000</p>
-                    </div>
-                    <div className="option_counter">
-                      <CheckCircleIcon style={{ color: "#73CA5C" }} />
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="seat_optionItem">
-                    <div className="seat_option_text" onClick={()=>setSeatClass("Premium Economy")}>
-                      <label>Premium Economy</label>
-                      <p>IDR 7.550.000</p>
-                    </div>
-                    <div className="option_counter">
-                      <CheckCircleIcon style={{ color: "#73CA5C" }} />
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="seat_optionItem">
-                    <div className="seat_option_text" onClick={()=>setSeatClass("Business")}>
-                      <label>Business</label>
-                      <p>IDR 29.220.000</p>
-                    </div>
-                    <div className="option_counter">
-                      <CheckCircleIcon style={{ color: "#73CA5C" }} />
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="seat_optionItem">
-                    <div className="seat_option_text" onClick={()=>setSeatClass("First Class")}>
-                      <label>First Class</label>
-                      <p>IDR 87.620.000</p>
-                    </div>
-                    <div className="option_counter">
-                      <CheckCircleIcon style={{ color: "#73CA5C" }} />
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="save_seatClass">
-                    <button onClick={()=>setopenSeatClass(!openSeatClass)}>Simpan</button>
-                  </div>
+                  {classes?.map((e) => {
+                    const priceConvert = new Intl.NumberFormat("id-ID", {
+                      style: "decimal",
+                      currency: "IDR",
+                    }).format(e?.price);
+
+                    console.log(priceConvert);
+
+                    return (
+                      <>
+                        <div
+                          className="seat_optionItem"
+                          // onChange={(e) => setClassName(e?.name)}
+                          onClick={() => {
+                            setSeatClass(e?.name);
+                            setClassName(e?.name);
+                            setopenSeatClass(!openSeatClass);
+                          }}
+                        >
+                          <div className="seat_option_text">
+                            <label>{e?.name}</label>
+                            <p>IDR. {priceConvert}</p>
+                          </div>
+                          {/* <div className="option_counter">
+                            <CheckCircleIcon style={{ color: "#73CA5C" }} />
+                          </div> */}
+                        </div>
+                        <hr />
+                      </>
+                    );
+                  })}
                 </div>
               )}
             </div>
           </div>
         </div>
         <div className="search_button">
-          {/* Link sementara */}
-          <Link to="/search">
-            <button>Cari Penerbangan</button>
-          </Link>
+          <button onClick={submitHandle}>Cari Penerbangan</button>
         </div>
       </div>
     </>

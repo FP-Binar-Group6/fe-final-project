@@ -35,7 +35,6 @@ const authSlicer = createSlice({
     },
   },
 });
-
 export const { setIsLoggedIn, setToken, setUserId, setUser } = authSlicer.actions;
 
 export default authSlicer.reducer;

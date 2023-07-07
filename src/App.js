@@ -29,6 +29,14 @@ import RedirectIfProtected from "./components/auth/RedirectProtected";
 import Protected from "./components/auth/Protected";
 
 function App() {
+  // const Layout = () => {
+  //   return (
+  //     <>
+  //     <Navbar/>
+  //     <Outlet/>
+  //     </>
+  //   )
+  // }
   useEffect(() => {
     function handleContextMenu(e) {
       if (process.env.NODE_ENV !== "development") {

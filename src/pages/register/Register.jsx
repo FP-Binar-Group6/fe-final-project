@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react'
 import './register.css'
 import auth from '../../assets/auth.jpg'
@@ -8,7 +9,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
-
 
 const Register = () => {
   const dispatch = useDispatch();
