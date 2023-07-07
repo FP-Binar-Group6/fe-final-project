@@ -1,6 +1,5 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { setBookingCode, setDataPemesan, setDataPenumpang, setPaymentId, setScheduleId } from "../reducers/booking";
 
 import {
   setBookingCode,
@@ -55,7 +54,7 @@ export const payment = (navigate) => async (dispatch, getState) => {
     const { paymentId, bookingCode } = getState().booking;
 
     let data = JSON.stringify({
-      "paymentMethodId": `${paymentId}`
+      paymentMethodId: `${paymentId}`,
     });
 
     let config = {
@@ -82,4 +81,4 @@ export const payment = (navigate) => async (dispatch, getState) => {
     }
     toast.error(error?.message);
   }
-}
+};

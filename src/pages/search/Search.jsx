@@ -16,25 +16,66 @@ import SearchFlight from "../../components/searchFlight/SearchFlight";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSchedule } from "../../redux/actions/search";
 import { Navigate } from "react-router-dom";
+import { set } from "date-fns";
 
 const Search = () => {
-  const filterUrutan = "Termurah";
-
-  const [openFilterModal, setOpenFilterModal] = useState(false);
-  const [ubahPencarianOpen, setUbahPencarianOpen] = useState(false);
-  const [sliceNext, setSliceNext] = useState(3);
-
-
   const dispatch = useDispatch();
 
   const schedule = useSelector((state) => state.search.filter);
 
   const titleSchedule = schedule[0];
 
+  const totalPassanger = useSelector((state) => state.search.passenger);
+
+  const [openFilterModal, setOpenFilterModal] = useState(false);
+  const [ubahPencarianOpen, setUbahPencarianOpen] = useState(false);
+  const [sliceNext, setSliceNext] = useState(3);
+  const [jumlahPenumpang, setJumlahPenumpang] = useState(0);
+  const [adult, setAdult] = useState(0);
+  const [children, setChildren] = useState(0);
+
+  const calendar = [
+    {
+      display: "Senin",
+      date: "02/03/2002",
+    },
+    {
+      display: "Selasa",
+      date: "02/03/2002",
+    },
+    {
+      display: "Rabu",
+      date: "02/03/2002",
+    },
+    {
+      display: "Kamis",
+      date: "02/03/2002",
+    },
+    {
+      display: "Jumat",
+      date: "02/03/2002",
+    },
+    {
+      display: "Sabtu",
+      date: "02/03/2002",
+    },
+    {
+      display: "Minggu",
+      date: "02/03/2002",
+    },
+    {
+      display: "Senin",
+      date: "02/03/2002",
+    },
+  ];
+
   const sliceMethod = () => {
     setSliceNext(sliceNext + 3);
   };
   useEffect(() => {
+    setAdult(totalPassanger?.adult);
+    setChildren(totalPassanger?.children);
+    setJumlahPenumpang(adult + children);
     dispatch(getAllSchedule());
   }, [dispatch]);
 
@@ -56,12 +97,11 @@ const Search = () => {
                 </p>
                 <span className="searchResultTextSub1">
                   {" "}
-                  &#160; - {pencarian.jumlahPenumpang} Penumpang -{" "}
+                  &#160; - {jumlahPenumpang} Penumpang -{" "}
                   {titleSchedule?.kelas?.name}
                 </span>
                 <span className="searchResultTextSub2">
-                  {pencarian.jumlahPenumpang} Penumpang -{" "}
-                  {titleSchedule?.kelas?.name}
+                  {jumlahPenumpang} Penumpang - {titleSchedule?.kelas?.name}
                 </span>
               </div>
             </div>
@@ -108,13 +148,6 @@ const Search = () => {
         <div className="searchFilterUrutan">
           <div className="searchItemLeftComponent">
             <SearchFilterItem />
-          </div>
-          <div
-            className="searchFilterUrutanItem"
-            onClick={() => setOpenFilterModal(!openFilterModal)}
-          >
-            <SwapVert className="searchFilterUrutanBtn" />
-            <p className="searchFilterUrutanText">{filterUrutan}</p>
           </div>
           {openFilterModal && (
             <SearchFilterUrutan

@@ -82,7 +82,7 @@ const BiodataForm = () => {
         lastName,
         birthDate,
         nationality,
-        idCardNumber,=
+        idCardNumber,
         scheduleId,
         userId,
       };
