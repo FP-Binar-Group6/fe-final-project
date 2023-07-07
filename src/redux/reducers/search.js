@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   schedule: [],
+  passenger: {},
   filter: [],
 };
 
@@ -15,9 +16,12 @@ const searchSlicer = createSlice({
     setSearch: (state, action) => {
       state.filter = action.payload;
     },
+    setPassenger: (state, action) => {
+      state.passenger = action.payload;
+    },
   },
 });
 
-export const { setSchedule, setSearch } = searchSlicer.actions;
+export const { setSchedule, setSearch, setPassenger } = searchSlicer.actions;
 
 export default searchSlicer.reducer;

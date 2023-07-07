@@ -39,7 +39,7 @@ const ResultItem = ({ data }) => {
   const dateHour = dateTime[0] + ":" + dateTime[1];
   const dateHour2 = dateTime2[0] + ":" + dateTime2[1];
 
-  console.log(dipilih);
+  // console.log(dipilih);
 
   const pilihSchedule = () => {
     navigate("/booking/pemesan");

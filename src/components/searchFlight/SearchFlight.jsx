@@ -29,6 +29,7 @@ import { FlightLand } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { setSchedule, setSearch } from "../../redux/reducers/search";
 import { getSearchSchedule } from "../../redux/actions/search";
+import { toast } from "react-toastify";
 
 const SearchFlight = () => {
   const [showSwitch, setshowSwitch] = useState(false);
@@ -44,7 +45,6 @@ const SearchFlight = () => {
   const [filterNameFrom, setFilterNameFrom] = useState("");
   const [destinationFrom, setDestinationFrom] = useState("");
   const [destinationTo, setDestinationTo] = useState("");
-
 
   const [seatClass, setSeatClass] = useState("");
   const [passenger, setPassenger] = useState({
@@ -73,23 +73,22 @@ const SearchFlight = () => {
       departureAirportId == undefined &&
       arrivalAirportId == null
     ) {
-      alert("Please fill up the form");
+      toast.error(`Lengkapi form pencarian terlebih dahulu!`);
     } else {
       const data = {
         departureTime,
         departureAirportId,
         arrivalAirportId,
         className,
+        passenger,
       };
-      console.log(data, "ini data input");
-
-      console.log(data);
       dispatch(
         getSearchSchedule(
           departureTime,
           departureAirportId,
           arrivalAirportId,
           className,
+          passenger,
           navigate
         )
       );
@@ -272,7 +271,7 @@ const SearchFlight = () => {
                   <Calendar
                     onChange={handleCalenderDeparture}
                     date={new Date()}
-                    minDate={new Date()}
+                    // minDate={new Date()}
                     className="CalendarElement"
                     color="#7126B5"
                     disabledDays={{ before: new Date() }}
@@ -313,7 +312,7 @@ const SearchFlight = () => {
             )}
           </div>
 
-          <div className="form-check form-switch">
+          {/* <div className="form-check form-switch">
             <input
               className="form-check-input"
               type="checkbox"
@@ -321,7 +320,7 @@ const SearchFlight = () => {
               id="flexSwitchCheckDefault"
               onClick={() => setshowSwitch(!showSwitch)}
             />
-          </div>
+          </div> */}
 
           <div className="passenger_container">
             <AirlineSeatReclineNormalIcon className="icon" />
@@ -450,8 +449,6 @@ const SearchFlight = () => {
                       style: "decimal",
                       currency: "IDR",
                     }).format(e?.price);
-
-                    console.log(priceConvert);
 
                     return (
                       <>

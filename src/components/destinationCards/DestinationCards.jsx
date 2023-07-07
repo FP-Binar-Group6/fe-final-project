@@ -15,59 +15,6 @@ import { getAllDestinationFav } from "../../redux/actions/home";
 import { useNavigate } from "react-router-dom";
 import { getSearchSchedule } from "../../redux/actions/search";
 
-const types = ["Semua", "Asia", "Amerika", "Australia", "Eropa", "Afrika"];
-
-// const destinationItem = [
-//   {
-//     offer: "limited",
-//     destinationFrom: "Jakarta",
-//     destinationTo: "bangkok",
-//     destinationPlane: "airasia",
-//     destinationDate: "20-30 Maret 2023",
-//     destinationPrice: "950.000",
-//   },
-//   {
-//     offer: "limited",
-//     destinationFrom: "Jakarta",
-//     destinationTo: "bangkok",
-//     destinationPlane: "airasia",
-//     destinationDate: "20-30 Maret 2023",
-//     destinationPrice: "950.000",
-//   },
-//   {
-//     offer: "limited",
-//     destinationFrom: "Jakarta",
-//     destinationTo: "bangkok",
-//     destinationPlane: "airasia",
-//     destinationDate: "20-30 Maret 2023",
-//     destinationPrice: "950.000",
-//   },
-//   {
-//     offer: "limited",
-//     destinationFrom: "Jakarta",
-//     destinationTo: "bangkok",
-//     destinationPlane: "airasia",
-//     destinationDate: "20-30 Maret 2023",
-//     destinationPrice: "950.000",
-//   },
-//   {
-//     offer: "limited",
-//     destinationFrom: "Jakarta",
-//     destinationTo: "bangkok",
-//     destinationPlane: "airasia",
-//     destinationDate: "20-30 Maret 2023",
-//     destinationPrice: "950.000",
-//   },
-//   {
-//     offer: "limited",
-//     destinationFrom: "Jakarta",
-//     destinationTo: "bangkok",
-//     destinationPlane: "airasia",
-//     destinationDate: "20-30 Maret 2023",
-//     destinationPrice: "950.000",
-//   },
-// ];
-
 const DestinationCards = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -79,7 +26,7 @@ const DestinationCards = () => {
 
   const destinasiFavorite = useSelector((state) => state.home.destinationFav);
 
-  console.log(destinasiFavorite);
+  // console.log(destinasiFavorite);
 
   const submitHandle = (
     departureAirportId,
@@ -102,7 +49,6 @@ const DestinationCards = () => {
       arrivalAirportId,
       className,
     };
-    console.log(data, "ini data input");
 
     navigate("/search");
 
@@ -122,26 +68,11 @@ const DestinationCards = () => {
     dispatch(getAllDestinationFav());
   }, [dispatch]);
 
-  console.log(destinasiFavorite);
+  // console.log(destinasiFavorite);
 
-
-  const [active, setActive] = useState(types[0]);
   return (
     <div className="destination_favorite">
       <h6>Destinasi Favorit</h6>
-      <div className="destination_category">
-        {types.map((e, i) => (
-          <div
-            className="destination_category_option"
-            key={i}
-            active={active == e.toString()}
-            onClick={() => setActive(e)}
-          >
-            <SearchIcon />
-            {e}
-          </div>
-        ))}
-      </div>
 
       <div className="destination_cards">
         <Swiper

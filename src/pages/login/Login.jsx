@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "./login.css";
 import auth from "../../assets/auth.jpg";
@@ -30,7 +29,6 @@ const Login = () => {
     dispatch(login(data, navigate));
   };
 
-
   return (
     <div className="Login">
       <img className="bg-login" src={auth} alt="" />
@@ -38,10 +36,15 @@ const Login = () => {
         <h2>Masuk</h2>
         <form onSubmit={onSubmit}>
           <p>Email</p>
-          <input className='email-input' placeholder='contoh: johndoe@gmail.com' value={email} onChange={(e) => setEmail(e.target.value)}/>
-          <label className='password'>
+          <input
+            className="email-input"
+            placeholder="contoh: johndoe@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label className="password">
             <p>Password</p>
-            <a href={'resetpassword'}> lupa kata sandi?</a>
+            <a href={"resetpassword"}> lupa kata sandi?</a>
           </label>
           <div className="password-input">
             <input

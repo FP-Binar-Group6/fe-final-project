@@ -52,10 +52,8 @@ export const getAllDestinationFav =
       );
 
       const { data } = response?.data;
-      console.log(data);
       dispatch(setDestinationFav(data));
     } catch (error) {
-      console.log("untuk munculin error", error);
       if (axios.isAxiosError(error)) {
         toast.error(error?.response?.data?.message);
         return;

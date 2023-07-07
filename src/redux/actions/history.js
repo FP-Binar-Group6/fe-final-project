@@ -17,7 +17,6 @@ export const getHistory = () => async (dispatch, getState) => {
     });
 
     const { data } = response?.data;
-    console.log(data);
     dispatch(setHistory(data));
   } catch (error) {
     if (axios.isAxiosError(error)) {

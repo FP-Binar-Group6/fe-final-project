@@ -1,78 +1,85 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-import { setBookingCode, setDataPemesan, setDataPenumpang, setPaymentId, setScheduleId } from "../reducers/booking";
+import {
+  setBookingCode,
+  setDataPemesan,
+  setDataPenumpang,
+  setPaymentId,
+  setScheduleId,
+} from "../reducers/booking";
 
-export const saveDataPenumpang = (dataPenumpang, navigate) => async (dispatch, getState) => {
+export const saveDataPenumpang =
+  (dataPenumpang, navigate) => async (dispatch, getState) => {
     try {
       const { token } = getState().auth;
 
-      let data = JSON.stringify(dataPenumpang)
+      let data = JSON.stringify(dataPenumpang);
       let config = {
-        method: 'post',
+        method: "post",
         maxBodyLength: Infinity,
         url: `${process.env.REACT_APP_AUTH_AirTicket}/api/tickets`,
-        headers: { 
-          'Content-Type': 'application/json', 
-          'Authorization': `Bearer ${token}`
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        data : data
+        data: data,
       };
       const response = await axios.request(config);
-      
-      const code = response?.data?.data?.find((value)=> value.bookingCode)
-      dispatch(setBookingCode(code.bookingCode))
-      dispatch(setDataPemesan(null))
-      dispatch(setDataPenumpang([]))
+
+      const code = response?.data?.data?.find((value) => value.bookingCode);
+      dispatch(setBookingCode(code.bookingCode));
+      dispatch(setDataPemesan(null));
+      dispatch(setDataPenumpang([]));
       toast.success("Silahkan pilih metode pembayaran!");
-      navigate("/booking/payment")
+      navigate("/booking/payment");
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        toast.error(error?.response?.data?.message|| error?.message);
+        toast.error(error?.response?.data?.message || error?.message);
         return;
       }
       toast.error(error?.message);
     }
+  };
+
+export const saveDataPemesan = (pemesan, navigate) => async (dispatch) => {
+  dispatch(setDataPemesan(pemesan));
+  toast.success("Data Pemesan berhasil tersimpan!");
+  navigate("/booking/penumpang");
 };
 
-export const saveDataPemesan = (pemesan, navigate)=> async (dispatch) => {
-  dispatch(setDataPemesan(pemesan));
-    toast.success("Data Pemesan berhasil tersimpan!");
-    navigate("/booking/penumpang");
-}
-
-export const payment = (navigate)=> async (dispatch, getState) => {
+export const payment = (navigate) => async (dispatch, getState) => {
   try {
     const { userId, token } = getState().auth;
     const { paymentId, bookingCode } = getState().booking;
 
     let data = JSON.stringify({
-      "userId": `${userId}`,
-      "paymentMethodId": `${paymentId}`
+      userId: `${userId}`,
+      paymentMethodId: `${paymentId}`,
     });
-    
+
     let config = {
-      method: 'put',
+      method: "put",
       maxBodyLength: Infinity,
       url: `${process.env.REACT_APP_AUTH_AirTicket}/api/payment/book/${bookingCode}`,
-      headers: { 
-        'Content-Type': 'application/json', 
-        'Authorization': `Bearer ${token}`
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      data : data
+      data: data,
     };
-    await axios.request(config)
+    await axios.request(config);
 
-    dispatch(setScheduleId(""))
-    dispatch(setPaymentId(""))
-    dispatch(setBookingCode(null))
+    dispatch(setScheduleId(""));
+    dispatch(setPaymentId(""));
+    dispatch(setBookingCode(null));
     toast.success("Terima kasih atas pembayaran transaksi");
     navigate("/booking/success");
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      toast.error(error?.response?.data?.message|| error?.message);
+      toast.error(error?.response?.data?.message || error?.message);
       return;
     }
     toast.error(error?.message);
   }
-}
+};

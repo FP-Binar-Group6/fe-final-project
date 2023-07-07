@@ -1,4 +1,3 @@
-
 import {
   BrowserRouter,
   Outlet,
@@ -139,7 +138,7 @@ function App() {
     //   </BrowserRouter>
 
     <Provider store={store}>
-//     <BrowserRouter>
+      {/* //     <BrowserRouter>
 //       <Navbar />
 //       <ToastContainer theme="colored"/>
 //       <Routes>
@@ -158,7 +157,7 @@ function App() {
 //         <Route path="/profile" element={<Profile />} />
 //       </Routes>
 //     </BrowserRouter>
-//     </Provider>
+//     </Provider> */}
 
       <BrowserRouter>
         <Navbar />
@@ -186,7 +185,15 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/search" element={<Search />} />
           <Route
-            path="/booking"
+            path="/booking/pemesan"
+            element={
+              <Protected>
+                <Booking />
+              </Protected>
+            }
+          />
+          <Route
+            path="/booking/penumpang"
             element={
               <Protected>
                 <Booking />
@@ -194,9 +201,30 @@ function App() {
             }
           />
 
-          <Route path="/booking/checkout" element={<Booking />} />
-          <Route path="/booking/payment" element={<Booking />} />
-          <Route path="/booking/success" element={<Booking />} />
+          <Route
+            path="/booking/checkout"
+            element={
+              <Protected>
+                <Booking />
+              </Protected>
+            }
+          />
+          <Route
+            path="/booking/payment"
+            element={
+              <Protected>
+                <Booking />
+              </Protected>
+            }
+          />
+          <Route
+            path="/booking/success"
+            element={
+              <Protected>
+                <Booking />
+              </Protected>
+            }
+          />
           <Route
             path="/history"
             element={
