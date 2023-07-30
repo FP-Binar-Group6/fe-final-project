@@ -15,6 +15,8 @@ export const saveDataPenumpang =
       const { token } = getState().auth;
 
       let data = JSON.stringify(dataPenumpang);
+
+      
       let config = {
         method: "post",
         maxBodyLength: Infinity,
@@ -28,13 +30,17 @@ export const saveDataPenumpang =
       const response = await axios.request(config);
 
       const code = response?.data?.data?.find((value) => value.bookingCode);
+      
+
       dispatch(setBookingCode(code.bookingCode));
       dispatch(setDataPemesan(null));
       dispatch(setDataPenumpang([]));
       toast.success("Silahkan pilih metode pembayaran!");
       navigate("/booking/payment");
+
     } catch (error) {
       if (axios.isAxiosError(error)) {
+
         toast.error(error?.response?.data?.message || error?.message);
         return;
       }
